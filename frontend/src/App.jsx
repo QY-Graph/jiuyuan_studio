@@ -18,15 +18,39 @@
  */
 
 import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'antd/dist/antd.css';
 import './static/style.css';
 import './static/navbar-fixed-left.css';
+import AppHeader from './components/header/AppHeader';
 import MainPage from './pages/Main/MainPage';
+import Group from './components/template/presentations/Group';
+// import EditorContainer from './components/contents/containers/Editor';
+// import Sidebar from './components/sidebar/containers/Sidebar';
+import Connct from './components/template/presentations/Connct';
+import Upload from './components/initializer2/presentation/GraphInitializer';
+// import Upload from '../../initializer/presentation/GraphInitializer';
+// import Connct from './components/template/presentations/SimpleContents';
 
+// const App = () => (
+//   <React.StrictMode>
+//     <MainPage />
+//   </React.StrictMode>
+// );
 const App = () => (
   <React.StrictMode>
-    <MainPage />
+    <Router>
+      <AppHeader />
+      {/* <MainPage /> */}
+      <Routes>
+        <Route path="/" element={<MainPage />}>
+          <Route path="editor" element={<Group />} />
+          <Route path="contents" element={<Connct />} />
+          <Route path="upload" element={<Upload />} />
+        </Route>
+      </Routes>
+    </Router>
   </React.StrictMode>
 );
 

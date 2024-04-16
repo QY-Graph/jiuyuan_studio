@@ -20,7 +20,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import FramesContainer from '../containers/Frames';
+import FramesContainer from '../containers/Frames2';
 import styles from './Contents.module.scss';
 
 const Contents = ({

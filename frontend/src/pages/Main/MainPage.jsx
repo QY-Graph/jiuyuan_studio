@@ -18,8 +18,32 @@
  */
 
 import React from 'react';
+// import { Routes, Route, useLocation } from 'react-router-dom';
 import DefaultTemplate from '../../components/template/DefaultTemplate';
+// import Group from '../../components/template/presentations/Group';
+// import Connct from '../../components/template/presentations/Connct';
+// import Upload from '../../components/initializer/presentation/GraphInitializer';
 
 const MainPage = () => <DefaultTemplate />;
+// const MainPage = () => {
+//   const [showUpload, setShowUpload] = useState(false);
+//   const location = useLocation();
+
+//   // 监听路由变化，更新 showUpload 状态
+//   useEffect(() => {
+//     setShowUpload(location.pathname.includes('/upload'));
+//   }, [location]);
+
+//   return (
+//     <DefaultTemplate>
+//       <Upload show={showUpload} setShow={setShowUpload} />
+//       <Routes>
+//         <Route path="editor" element={<Group />} />
+//         <Route path="contents" element={<Connct />} />
+//         <Route path="upload" element={null} />
+//       </Routes>
+//     </DefaultTemplate>
+//   );
+// };
 
 export default MainPage;

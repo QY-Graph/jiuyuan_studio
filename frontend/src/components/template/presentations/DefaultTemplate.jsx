@@ -18,17 +18,20 @@
  */
 
 import React, { useEffect, useState } from 'react';
+// import { Routes, Route, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { Row, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
-import EditorContainer from '../../contents/containers/Editor';
-import Sidebar from '../../sidebar/containers/Sidebar';
-import Contents from '../../contents/containers/Contents';
+// import EditorContainer from '../../contents/containers/Editor';
+// import Sidebar from '../../sidebar/containers/Sidebar';
+// import Contents from '../../contents/containers/Contents';
 import Modal from '../../modal/containers/Modal';
 import { loadFromCookie, saveToCookie } from '../../../features/cookie/CookieUtil';
 import BuilderContainer from '../../query_builder/BuilderContainer';
+// import AppHeader from '../../header/AppHeader';
 import './DefaultTemplate.scss';
 import KeyWordFinder from '../../../features/query_builder/KeyWordFinder';
 
@@ -94,6 +97,7 @@ const DefaultTemplate = ({
 
   return (
     <div className="default-template">
+      {/* <AppHeader /> */}
       { isOpen && <Modal /> }
       <input
         type="radio"
@@ -119,15 +123,12 @@ const DefaultTemplate = ({
           <BuilderContainer open={open} setOpen={setOpen} finder={finder} />
         </div>
         <div className="editor-division wrapper-extension-padding">
-
-          <EditorContainer />
+          {/* <EditorContainer />
           <Sidebar />
-          <Contents />
-
+          <Contents /> */}
+          <Outlet />
         </div>
-
       </Row>
-
     </div>
   );
 };

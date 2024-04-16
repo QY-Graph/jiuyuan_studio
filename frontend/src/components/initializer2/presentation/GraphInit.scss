@@ -1,0 +1,148 @@
+
+.ModalContainer {
+    display: flex;
+    // flex-direction: col;
+    padding: 20px 40px;
+}
+
+.headerOuter{
+  position: relative;
+}
+
+.title{
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.Modal {
+    margin: auto;
+}
+
+.uploadOuter{
+    display: flex;
+}
+
+.modalRow {
+    // margin-left: 20px;
+    padding: 0;
+    justify-content: space-around;
+    flex-wrap: nowrap;
+    border: 1px solid #bfbebe;
+    width: 320px;
+}
+.modalRow2 {
+  margin-left: 20px;
+  padding: 0;
+  justify-content: space-around;
+  flex-wrap: nowrap;
+  border: 1px solid #bfbebe;
+  width: 320px;
+}
+
+.modalRowInner{
+  display: flex;
+  align-items: center;
+  line-height: 30px;
+  justify-content: space-between;
+}
+
+.largeIcon{
+  margin-left: 10px;
+  font-size: 20px;
+}
+
+.BtnOuter{
+  height: 40px;
+  justify-content: space-between;
+  display: flex;
+  margin: 10px 0 10px 0;
+  padding: 0 15px;
+}
+
+.tableTitle{
+  line-height: 40px;
+  font-size: 20px;
+  font-weight: bold;
+  
+}
+
+.clearOuter{
+  // display: flex;
+  margin-left: 20px;
+  // position: absolute;
+  // right: 0;
+  // top: 0;
+}
+
+.uploadBtn{
+  // width: 180px;
+}
+
+.modalCol {
+    align-content: center;
+    // display: flex;
+}
+
+#headerRow{
+  padding: 0;
+}
+
+.graphOuter{
+  display: flex;
+  // justify-content: space-between;
+}
+
+#removeFile:hover {
+    cursor: pointer;
+    opacity: 30%;
+}
+#removeFile{
+    color: red;
+}
+
+#graphInputRow{
+  display: flex;
+    justify-content: space-around;
+    padding: 8px;
+    width: 100%;
+    border: 1px solid #bfbebe;
+    border-radius: 2px;
+    margin: 0;
+    height: 60px;
+    text-align: center;
+    align-items: center;
+}
+#graphNameInput{
+    padding: 5px;
+    margin: 2px;
+}
+.graphInputCol{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-width: 320px;
+}
+.readyFiles{
+    display: block;
+}
+
+.modal-header{
+    align-items: center;
+    margin: 8px;
+}
+.modal-footer{
+    justify-content: space-between;
+}
+
+#doneButton{
+
+}
+
+#clearButton{
+    margin: 0 10px 0 0;
+    background-color: rgb(217, 142, 4);
+    border: none;
+}
+#clearButton:hover{
+    opacity: 10;
+}
