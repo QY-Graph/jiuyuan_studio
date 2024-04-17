@@ -103,3 +103,9 @@ To Connect to postgreSQL server running from Docker Container
 # License
 
 Apache AGE Viewer is licensed under the Apache License, Version 2.0. See LICENSE for the full license text.
+
+
+# 测试
+```
+SELECT * FROM cypher('my_graph', $$MATCH (n)-[r]->(m) RETURN n, r, m$$) As (n agtype, r agtype, m agtype);
+```

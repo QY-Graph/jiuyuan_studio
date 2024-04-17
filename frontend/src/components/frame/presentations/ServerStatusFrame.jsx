@@ -23,7 +23,7 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlayCircle, faQuestionCircle } from '@fortawesome/free-regular-svg-icons';
 import { Col, Row } from 'antd';
-import { Button } from 'react-bootstrap';
+// import { Button } from 'react-bootstrap';
 import MetadataCytoscapeChart from '../../cytoscape/MetadataCytoscapeChart';
 import InitGraphModal from '../../initializer/presentation/GraphInitializer';
 import Frame from '../Frame';
@@ -81,7 +81,7 @@ const ServerStatusFrame = ({
               </Col>
               <Col>
                 <p>
-                  <Button onClick={() => setShow(!showModal)}>Create Graph</Button>
+                  {/* <Button onClick={() => setShow(!showModal)}>Create Graph</Button> */}
                   <FontAwesomeIcon onClick={() => dispatch(openTutorial())} icon={faQuestionCircle} size="lg" style={{ marginLeft: '1rem', cursor: 'pointer' }} />
                 </p>
               </Col>

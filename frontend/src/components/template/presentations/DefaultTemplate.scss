@@ -6,6 +6,9 @@
     display: flex;
     justify-items: space-evenly;
     margin:2px 2px 2px 2px;
+    overflow-y: auto;
+    min-height: calc(100vh - 105px);
+    padding-top: 10px;
 }
 .row{
     flex-wrap: nowrap;

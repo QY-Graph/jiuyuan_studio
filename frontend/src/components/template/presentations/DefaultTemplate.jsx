@@ -22,7 +22,7 @@ import React, { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import { Row, Button } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 // import EditorContainer from '../../contents/containers/Editor';
@@ -115,7 +115,7 @@ const DefaultTemplate = ({
         checked={theme === 'dark'}
         readOnly
       />
-      <Row className="content-row">
+      <div className="content-row">
         <div>
           <Button onClick={() => setOpen(true)}>
             <FontAwesomeIcon icon={faBars} />
@@ -128,7 +128,7 @@ const DefaultTemplate = ({
           <Contents /> */}
           <Outlet />
         </div>
-      </Row>
+      </div>
     </div>
   );
 };

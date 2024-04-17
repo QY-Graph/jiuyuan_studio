@@ -20,13 +20,13 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import Contents from '../../frame/containers/ContentsFrameContainer';
+// import Contents from '../../frame/containers/ContentsFrameContainer';
 import ServerStatus from '../../frame/containers/ServerStatusContainer';
 import ServerConnect from '../../frame/containers/ServerConnectContainer';
 import ServerDisconnect from '../../frame/containers/ServerDisconnectContainer';
-import CypherGraphResult from '../../frame/containers/CypherGraphResultContainers';
-import CypherResult from '../../frame/containers/CypherResultContainers';
-import CSV from '../../csv';
+// import CypherGraphResult from '../../frame/containers/CypherGraphResultContainers';
+// import CypherResult from '../../frame/containers/CypherResultContainers';
+// import CSV from '../../csv';
 import { setting } from '../../../conf/config';
 
 const Frames = ({
@@ -61,27 +61,27 @@ const Frames = ({
       if (index > maxNumOfFrames && maxNumOfFrames !== 0) {
         return '';
       }
-      if (frame.frameName === 'Contents') {
-        return (
-          <Contents
-            key={frame.frameProps.key}
-            refKey={frame.frameProps.key}
-            reqString={frame.frameProps.reqString}
-            playTarget={frame.frameProps.playTarget}
-            isPinned={frame.isPinned}
-          />
-        );
-      }
-      if (frame.frameName === 'CSV') {
-        return (
-          <CSV
-            key={frame.frameProps.key}
-            refKey={frame.frameProps.key}
-            reqString={frame.frameProps.reqString}
-            isPinned={frame.isPinned}
-          />
-        );
-      }
+      // if (frame.frameName === 'Contents') {
+      //   return (
+      //     <Contents
+      //       key={frame.frameProps.key}
+      //       refKey={frame.frameProps.key}
+      //       reqString={frame.frameProps.reqString}
+      //       playTarget={frame.frameProps.playTarget}
+      //       isPinned={frame.isPinned}
+      //     />
+      //   );
+      // }
+      // if (frame.frameName === 'CSV') {
+      //   return (
+      //     <CSV
+      //       key={frame.frameProps.key}
+      //       refKey={frame.frameProps.key}
+      //       reqString={frame.frameProps.reqString}
+      //       isPinned={frame.isPinned}
+      //     />
+      //   );
+      // }
       if (frame.frameName === 'ServerStatus') {
         return (
           <ServerStatus
@@ -107,27 +107,6 @@ const Frames = ({
       if (frame.frameName === 'ServerDisconnect') {
         return (
           <ServerDisconnect
-            key={frame.frameProps.key}
-            refKey={frame.frameProps.key}
-            reqString={frame.frameProps.reqString}
-            isPinned={frame.isPinned}
-          />
-        );
-      }
-      if (frame.frameName === 'CypherResultFrame') {
-        if (queryResult[frame.frameProps.key]?.complete && (queryResult[frame.frameProps.key].command !== null ? queryResult[frame.frameProps.key].command.toUpperCase() : 'NULL')
-          .match('(ERROR|GRAPH|CREATE|UPDATE|COPY|NULL).*')) {
-          return (
-            <CypherResult
-              key={frame.frameProps.key}
-              refKey={frame.frameProps.key}
-              reqString={frame.frameProps.reqString}
-              isPinned={frame.isPinned}
-            />
-          );
-        }
-        return (
-          <CypherGraphResult
             key={frame.frameProps.key}
             refKey={frame.frameProps.key}
             reqString={frame.frameProps.reqString}
