@@ -20,7 +20,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  Button, Col, Form, Input, InputNumber, Row,
+  Button, Col, Form, Input, Row,
 } from 'antd';
 import { useDispatch } from 'react-redux';
 import Frame from '../Frame';
@@ -87,12 +87,12 @@ const ServerConnectFrame = ({
               layout="vertical"
               onFinish={connectToDatabase}
             >
-              <Form.Item name="host" label="Connect URL" rules={[{ required: true }]}>
+              {/* <Form.Item name="host" label="Connect URL" rules={[{ required: true }]}>
                 <Input placeholder="192.168.0.1" />
               </Form.Item>
               <Form.Item name="port" label="Connect Port" rules={[{ required: true }]}>
                 <InputNumber placeholder="5432" className={styles.FullWidth} />
-              </Form.Item>
+              </Form.Item> */}
               <Form.Item name="database" label="Database Name" rules={[{ required: true }]}>
                 <Input placeholder="postgres" />
               </Form.Item>

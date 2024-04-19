@@ -29,6 +29,7 @@ import {
   VerticalLine, HorizontalLine, SubLabelLeft, SubLabelRight, GraphSelectDropdown,
 } from './SidebarComponents';
 
+// TODO: keep only the cypher query without "select * .."
 const genLabelQuery = (eleType, labelName, database) => {
   if (eleType === 'node') {
     if (labelName === '*') {
