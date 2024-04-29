@@ -48,7 +48,7 @@ const Frames = ({
 
     if (database.status === 'disconnected') {
       const serverConnectFrames = frameList.filter((frame) => (frame.frameName.toUpperCase() === 'SERVERCONNECT'));
-      if (!setting.closeWhenDisconnect) {
+      if (!setting.closeWhenDisconnect && serverConnectFrames.length === 0) {
         dispatch(() => addFrame(':server connect', 'ServerConnect'));
       } else if (serverConnectFrames.length === 0) {
         window.close();
