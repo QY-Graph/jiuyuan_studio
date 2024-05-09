@@ -37,5 +37,8 @@ module.exports = {
   plugins: ['babel', 'react', 'import', 'react-hooks'],
   rules: {
     'linebreak-style': 0, // fow winodw user
+    "no-console": "off",
+    "no-alert": "off",
+    "func-names": "off",
   },
 };

@@ -8,7 +8,9 @@ import { DeleteTwoTone } from '@ant-design/icons';
 import uuid from 'react-uuid';
 // import PropTypes from 'prop-types';
 import './GraphInit.scss';
-import { Divider, Checkbox, Input } from 'antd';
+import {
+  Divider, Checkbox, Input, message,
+} from 'antd';
 import { useDispatch } from 'react-redux';
 import { addAlert } from '../../../features/alert/AlertSlice';
 import { changeGraph } from '../../../features/database/DatabaseSlice';
@@ -102,6 +104,7 @@ const InitGraphModal = () => {
           throw resData;
         } else {
           // setShow(false);
+          message.success('上传成功，请到查询标签使用！');
           dispatch(addAlert('CreateGraphSuccess'));
           dispatch(getMetaData()).then(() => {
             dispatch(changeCurrentGraph({ name: graphName }));
@@ -111,6 +114,7 @@ const InitGraphModal = () => {
       })
       .catch((err) => {
         console.log('error', err);
+        message.error('上传失败，请检查参数重新尝试！');
         setLoading(false);
         setError(err);
       });
