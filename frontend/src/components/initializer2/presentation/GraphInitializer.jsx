@@ -110,6 +110,7 @@ const InitGraphModal = () => {
             dispatch(changeCurrentGraph({ name: graphName }));
             dispatch(changeGraph({ graphName }));
           });
+          clearState();
         }
       })
       .catch((err) => {

@@ -35,7 +35,7 @@ const Editor = ({
   setCommand,
   activeRequests,
   command,
-  update,
+  // update,
   addFrame,
   trimFrame,
   addAlert,
@@ -98,6 +98,7 @@ const Editor = ({
       addFrame(command, 'CypherResultFrame', refKey);
       const req = dispatch(() => executeCypherQuery([refKey, command]));
       req.then((response) => {
+        // console.log(response);
         if (response.type === 'cypher/executeCypherQuery/rejected') {
           if (response.error.name !== 'AbortError') {
             dispatch(() => addAlert('ErrorCypherQuery'));
@@ -108,7 +109,9 @@ const Editor = ({
           }
           return;
         }
-        if (update) dispatch(getMetaData());
+        // console.log(update);
+        // if (update)
+        dispatch(getMetaData());
       });
       activePromises[refKey] = req;
       setPromises({ ...activePromises });
@@ -239,7 +242,7 @@ Editor.propTypes = {
   executeCypherQuery: PropTypes.func.isRequired,
   addCommandHistory: PropTypes.func.isRequired,
   toggleMenu: PropTypes.func.isRequired,
-  update: PropTypes.bool.isRequired,
+  // update: PropTypes.bool.isRequired,
   setLabel: PropTypes.func.isRequired,
   isLabel: PropTypes.bool.isRequired,
   // addCommandFavorites: PropTypes.func.isRequired,
