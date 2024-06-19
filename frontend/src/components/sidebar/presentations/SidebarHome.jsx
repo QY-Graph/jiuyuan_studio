@@ -34,27 +34,17 @@ import './Sidebar.scss';
 const genLabelQuery = (eleType, labelName, database) => {
   if (eleType === 'node') {
     if (labelName === '*') {
-      return `SELECT * from cypher('${database.graph}', $$
-        MATCH (V)
-        RETURN V
-$$) as (V agtype);`;
+      // eslint-disable-next-line quotes
+      return `MATCH (V) RETURN V;`;
     }
-    return `SELECT * from cypher('${database.graph}', $$
-        MATCH (V:${labelName})
-        RETURN V
-$$) as (V agtype);`;
+    return `MATCH (V:${labelName}) RETURN V $$) as (V agtype);`;
   }
   if (eleType === 'edge') {
     if (labelName === '*') {
-      return `SELECT * from cypher('${database.graph}', $$
-        MATCH (V)-[R]-(V2)
-        RETURN V,R,V2
-$$) as (V agtype, R agtype, V2 agtype);`;
+      // eslint-disable-next-line quotes
+      return `MATCH (V)-[R]-(V2) RETURN V,R,V2 $$) as (V agtype, R agtype, V2 agtype);`;
     }
-    return `SELECT * from cypher('${database.graph}', $$
-        MATCH (V)-[R:${labelName}]-(V2)
-        RETURN V,R,V2
-$$) as (V agtype, R agtype, V2 agtype);`;
+    return `MATCH (V)-[R:${labelName}]-(V2) RETURN V,R,V2 $$) as (V agtype, R agtype, V2 agtype);`;
   }
 
   return '';

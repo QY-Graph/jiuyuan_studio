@@ -49,6 +49,7 @@ const validateVlePathVariableReturn = (cypherQuery) => {
 export const executeCypherQuery = createAsyncThunk(
   'cypher/executeCypherQuery',
   async (args, thunkAPI) => {
+    // console.log(args[1]);
     try {
       const response = await fetch('/api/v1/cypher',
         {

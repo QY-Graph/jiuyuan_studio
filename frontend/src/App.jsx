@@ -135,22 +135,22 @@ const AppContent = () => {
     console.log(targetPath);
 
     if (targetPath === '/connect') {
-      // if (databaseStatus !== 'connected') {
-      return <Connct />;
-      // }
-      // return <Navigate replace to='/editor' />;
+      if (databaseStatus !== 'connected') {
+        return <Connct />;
+      }
+      return <Navigate replace to='/editor' />;
     }
     if (targetPath === '/editor') {
-      // if (databaseStatus === 'connected') {
-      return <Group />;
-      // }
-      // return <Navigate replace to='/connect' />;
+      if (databaseStatus === 'connected') {
+        return <Group />;
+      }
+      return <Navigate replace to='/connect' />;
     }
     if (targetPath === '/upload') {
-      // if (databaseStatus === 'connected') {
-      return <Upload />;
-      // }
-      // return <Navigate replace to='/connect' />;
+      if (databaseStatus === 'connected') {
+        return <Upload />;
+      }
+      return <Navigate replace to='/connect' />;
     }
     return <Navigate replace to='/connect' />;
   };

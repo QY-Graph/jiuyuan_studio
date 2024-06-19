@@ -66,7 +66,6 @@ const ServerConnectFrame = ({
           dispatch(addAlert('ErrorMetaFail'));
         }
       });
-
       dispatch(addFrame(':server status', 'ServerStatus'));
     } else if (response.type === 'database/connectToDatabase/rejected') {
       message.error(`连接失败: ${response.error.message}`);
@@ -151,12 +150,12 @@ const ServerConnectFrame = ({
               layout="vertical"
               onFinish={connectToDatabase}
             >
-              <Form.Item name="host" label="Connect URL" rules={[{ required: true }]}>
+              {/* <Form.Item name="host" label="Connect URL" rules={[{ required: true }]}>
                 <Input placeholder="192.168.0.1" />
               </Form.Item>
               <Form.Item name="port" label="Connect Port" rules={[{ required: true }]}>
                 <InputNumber placeholder="5432" className={styles.FullWidth} />
-              </Form.Item>
+              </Form.Item> */}
               {/* <Form.Item name="database" label="Connect Port" rules={[{ required: true }]}>
                 <Input placeholder="" className={styles.FullWidth} />
               </Form.Item> */}

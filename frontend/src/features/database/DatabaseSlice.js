@@ -32,7 +32,10 @@ export const connectToDatabase = createAsyncThunk(
           },
           body: JSON.stringify(formData),
         });
-      if (response.ok) { return await response.json(); }
+      if (response.ok) { 
+        localStorage.setItem('databaseStatus', 'connected');
+        return await response.json(); 
+      }
       throw response;
     } catch (error) {
       const errorJson = await error.json();
@@ -75,7 +78,7 @@ export const getConnectionStatus = createAsyncThunk(
 const DatabaseSlice = createSlice({
   name: 'database',
   initialState: {
-    status: 'init',
+    status: localStorage.getItem('databaseStatus') || 'init',
   },
   reducers: {
     changeGraph: (state, action) => ({
