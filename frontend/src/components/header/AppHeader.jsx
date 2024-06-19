@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Layout, Menu } from 'antd';
+import {
+  Layout, Col, Input, Row,
+} from 'antd';
 import './AppHeader.scss';
 
 const { Header } = Layout;
@@ -17,10 +19,10 @@ const AppHeader = () => {
     {
       label: (
         <div className="svgOuter">
-          <svg className="icon1" aria-hidden="true">
-            <use href="#icon-zhuye1" />
+          <svg className="icon" aria-hidden="true">
+            <use href="#icon-lianjie2" />
           </svg>
-          <Link to="/">主页</Link>
+          <Link to="/contents">连接</Link>
         </div>
       ),
       key: '1',
@@ -40,17 +42,6 @@ const AppHeader = () => {
       label: (
         <div className="svgOuter">
           <svg className="icon" aria-hidden="true">
-            <use href="#icon-lianjie2" />
-          </svg>
-          <Link to="/contents">连接</Link>
-        </div>
-      ),
-      key: '3',
-    },
-    {
-      label: (
-        <div className="svgOuter">
-          <svg className="icon" aria-hidden="true">
             <use href="#icon-shangchuan" />
           </svg>
           <Link to="/upload">上传</Link>
@@ -61,9 +52,39 @@ const AppHeader = () => {
   ];
 
   return (
-    <Header>
-      <Menu onClick={onClick} selectedKeys={[current]} mode="horizontal" items={items} className="antdMenu" />
-    </Header>
+    <div className='rowout'>
+      {/* <Menu onClick={onClick} selectedKeys={[current]}
+      mode="horizontal" items={items} className="antdMenu" /> */}
+      <Row className='myrow'>
+        <Col span={8} className='mycol'>
+          <div className='colinner'>
+            <div className='imgout'>
+              <img src="/resources/images/menu/menu1.png" alt="Description" className='Circle' />
+              <img src="/resources/images/menu/menuicon1.png" alt="Description" className='Circle2' />
+            </div>
+            <div className='activetitle'>Broken Line</div>
+          </div>
+        </Col>
+        <Col span={8} className='mycol'>
+          <div className='colinner'>
+            <div className='imgout'>
+              <img src="/resources/images/menu/menu2.png" alt="Background" className='Circle' />
+              <img src="/resources/images/menu/menuicon2.png" alt="Logo" className='Circle2' />
+            </div>
+            <div className='deactivetitle'>Upload</div>
+          </div>
+        </Col>
+        <Col span={8} className='mycol'>
+          <div className='colinner'>
+            <div className='imgout'>
+              <img src="/resources/images/menu/menu3.png" alt="Description" className='Circle' />
+            </div>
+            <div className='deactivetitle'>Search</div>
+          </div>
+        </Col>
+      </Row>
+
+    </div>
   );
 };
 

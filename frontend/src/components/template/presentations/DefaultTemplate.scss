@@ -14,3 +14,26 @@
     flex-wrap: nowrap;
     overflow-y: scroll;
 }
+
+.edit-header{
+  background-color: #fff;
+  height: 120px;
+}
+
+.group-main-content{
+  margin-top: 20px;
+  display: flex;
+  width: 100%;
+  padding: 0 20px;
+}
+.edit-sidebar{
+  width: 28%;
+}
+
+.edit-main{
+  width: 72%;
+}
+
+.ant-layout{
+  background: transparent;
+}

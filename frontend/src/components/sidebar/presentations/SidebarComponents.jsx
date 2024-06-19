@@ -110,13 +110,10 @@ const GraphSelectDropdown = ({
   );
   return (
     <Col id="graphSelectionContainer">
-      <Select onChange={handleGraphClick} placeholder="Select Graph" style={selectStyle} value={currentGraph}>
+      <Select size="large" onChange={handleGraphClick} placeholder="Select Graph" style={selectStyle} value={currentGraph}>
         {options}
       </Select>
       <br />
-      <b>
-        Current Graph
-      </b>
     </Col>
   );
 };

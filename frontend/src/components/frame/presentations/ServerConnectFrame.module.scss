@@ -18,9 +18,163 @@
  */
 
 .FrameWrapper {
-  max-width: 450px;
+  // min-width: 300px;
+  display: flex;
+  justify-content: center;
+}
+
+.FormLogin{
+  padding: 0 10% 0 10%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.FormMain{
+ width: 80%;
+ max-width: 500px;
 }
 
 .FullWidth {
   width: 100% !important;
 }
+
+.MyImage{
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 覆盖容器，不变形 */
+  object-position: center; /* 图片居中显示 */
+}
+
+.LogoImage{
+  width: 88px;
+  height: 88px;
+  position: absolute;
+  top: 42%;           /* 垂直居中 */
+  left: 50%;          /* 水平居中 */
+  transform: translate(-50%, -50%); /* 使用 transform 实现完全居中 */
+}
+
+.FullHeightRow {
+  height: 100%;
+}
+
+.ColRight{
+  padding: 1% 5% 1% 1%;
+}
+
+.Mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, rgba(49, 49, 49, 0.3) -4.74%, rgba(0, 0, 0, 0.55) 103.32%);
+}
+
+.InputOut{
+  height: 40px;
+  width: 200px;
+}
+
+.IMG{
+  height: 30px;
+  width: 30px;
+  transition: transform 0.3s ease-in-out;  // 添加平滑过渡效果
+  transform-origin: center;  // 确保缩放中心点为图标中心
+}
+
+.InputOner{
+  border-radius: 10px;
+  border: 1px solid#F5F5F7;
+}
+
+.SubmitBtn{
+  margin-top: 20px;
+  height: 72px;
+  width: 180px;
+  border-radius: 9px;
+  font-size: 20px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  float: right;
+}
+
+.FormItemOut {
+  position: relative;
+  transition: all 0.3s;
+  // padding: 10px;
+
+  .InputOner {
+    background: #F5F5F7;
+    // background-color: transparent; // 确保输入框没有背景
+    border: none; // 移除输入框自带的边框
+    height: 60px;
+    font-size: 20px;
+
+    &:focus {
+      background-color: #FFFFFF;  // 设置获得焦点时的背景色为白色
+      // outline: none;  // 可选：移除焦点时的边框（如果存在）
+    }
+
+    &:focus-within {
+
+      .IMG{
+        transform: scale(0.8);
+      }
+
+      background-color: #fff; // 点击时的背景色
+    }
+  }
+}
+
+.InputLabel {
+  position: absolute;
+  left: 66px;
+  top: 16px;
+  font-size: 18px;
+  // transition: transform 0.3s, background-color 0.3s;
+  transition: all 0.2s ease;
+  pointer-events: none;
+  z-index: 10;
+  color: #b0b2be;
+  font-weight: bold;
+}
+
+.InputLabel.focused {
+  // 只在y轴方向上移动，x轴不移动
+  transform: translateY(-30px);
+  padding: 0 8px;
+  border-radius: 4px;
+  background: #fff;
+  font-size: 14px;
+}
+
+.filled {
+  display: none;
+}
+
+.FormTitle{
+  width: 100%;
+  padding:  0 10%;
+  margin-bottom: 30px;
+}
+
+.FormTitle1{
+  color: #2e3367;
+  font-size: 36px;
+  font-weight: bolder;
+}
+
+.FormTitle2{
+  font-size: 16px;
+  color: #8e8e8e;
+}
+
+// .FormItemOut{
+//   position: relative;
+// }

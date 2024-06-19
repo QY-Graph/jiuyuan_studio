@@ -2,19 +2,20 @@ import React, { useState, useRef } from 'react';
 import {
   /* Form, */ Col, Button, ListGroup, Spinner, Alert,
 } from 'react-bootstrap';
-import { DeleteTwoTone } from '@ant-design/icons';
+import { DeleteTwoTone, PlusOutlined } from '@ant-design/icons';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faMinusCircle } from '@fortawesome/free-solid-svg-icons';
 import uuid from 'react-uuid';
 // import PropTypes from 'prop-types';
 import './GraphInit.scss';
 import {
-  Divider, Checkbox, Input, message,
+  Divider, Checkbox, Input, message, Layout,
 } from 'antd';
 import { useDispatch } from 'react-redux';
 import { addAlert } from '../../../features/alert/AlertSlice';
-import { changeGraph } from '../../../features/database/DatabaseSlice';
+import { changeGraph, getConnectionStatus } from '../../../features/database/DatabaseSlice';
 import { changeCurrentGraph, getMetaData } from '../../../features/database/MetadataSlice';
+import AppHeader2 from '../../header/AppHeader2';
 
 const InitGraphModal = () => {
   // const [show, setShow] = useState(true);
@@ -27,6 +28,10 @@ const InitGraphModal = () => {
   const edgeInputRef = useRef();
   const nodeInputRef = useRef();
   const dispatch = useDispatch();
+
+  const { 
+    Header, Footer, Sider, Content,
+  } = Layout;
 
   const clearState = () => {
     setNodeFiles({});
@@ -104,7 +109,7 @@ const InitGraphModal = () => {
           throw resData;
         } else {
           // setShow(false);
-          message.success('上传成功，请到查询标签使用！');
+          message.success('上传成功，请到 Search 标签使用！');
           dispatch(addAlert('CreateGraphSuccess'));
           dispatch(getMetaData()).then(() => {
             dispatch(changeCurrentGraph({ name: graphName }));
@@ -124,10 +129,15 @@ const InitGraphModal = () => {
   const modalInputBody = () => (
     <>
       <div className="graphOuter">
+        <div className='graphTitle'>
+          <div className='blockItem' />
+          Create a Graph
+        </div>
         <div className="graphInputCol">
           <div id="graphInputRow">
             <Input
               id="graphNameInput"
+              className='InputOner'
               type="text"
               placeholder="graph name"
               defaultValue={graphName}
@@ -136,64 +146,40 @@ const InitGraphModal = () => {
               required
             />
           </div>
-          <div id="graphInputRow">
+          <div id="graphInputRow2">
             <Checkbox
               onChange={(e) => setDropGraph(e.target.checked)}
               defaultChecked={dropGraph}
               checked={dropGraph}
             >
-              DROP graph if exists
+              <div className='checkbox-text'>DROP graph if exists</div>
             </Checkbox>
           </div>
         </div>
-        <div className="clearOuter">
-          <Button id="clearButton" onClick={clearState}>
-            Clear
-          </Button>
-          <Button id="doneButton" onClick={handleSubmit}>
-            Done
-          </Button>
-        </div>
       </div>
-      <Divider />
       <div className="uploadOuter">
         <div className="modalRow">
-          <div className="BtnOuter">
-            <div className="tableTitle">
-              Node Tables
-            </div>
-            <Button onClick={() => nodeInputRef.current.click()} className="uploadBtn">
-              Add
-              <input type="file" ref={nodeInputRef} onChange={handleSelectNodeFiles} accept=".csv" multiple hidden />
-            </Button>
-          </div>
-          <Divider style={{ margin: '10px 0 12px 0' }} />
           {/* <div className="modalRow"> */}
-          <div>
+          <div className='listOut'>
             <ListGroup className="readyFiles">
               {
                 Object.entries(nodeFiles).map(([k, { data: file, name }]) => (
-                  <ListGroup.Item key={k}>
+                  <ListGroup.Item key={k} className='listItem'>
                     <div className="modalRowInner">
-                      <Input
-                        id="graphNameInput"
-                        placeholder="label name"
-                        data-key={k}
-                        defaultValue={name}
-                        onChange={(e) => {
-                          setName(e.target.value, k, 'node');
-                        }}
-                        required
-                      />
-                    </div>
-                    <div className="modalRowInner">
-                      <div>{file.name}</div>
-                      {/* <FontAwesomeIcon
-                        id="removeFile"
-                        data-id={k}
-                        onClick={() => removeNodeFile(k)}
-                        icon={faMinusCircle}
-                      /> */}
+                      <img src="/resources/images/menu/csv.png" alt="Description" className='csvfile' />
+                      <div className='fileName'>{file.name}</div>
+                      <div className="inputOut">
+                        <Input
+                          id="graphNameInput"
+                          placeholder="Node Name"
+                          data-key={k}
+                          defaultValue={name}
+                          onChange={(e) => {
+                            setName(e.target.value, k, 'node');
+                          }}
+                          required
+                        />
+                      </div>
                       <DeleteTwoTone id="removeFile" data-id={k} className="largeIcon" twoToneColor="#eb2f96" onClick={() => removeNodeFile(k)} />
                     </div>
                   </ListGroup.Item>
@@ -201,53 +187,59 @@ const InitGraphModal = () => {
             }
             </ListGroup>
           </div>
-          {/* </div> */}
-        </div>
-        <div className="modalRow2">
           <div className="BtnOuter">
-            <div className="tableTitle">
-              Edge Tables
-            </div>
-            <Button onClick={() => edgeInputRef.current.click()} className="uploadBtn">
-              Add
-              <input type="file" ref={edgeInputRef} onChange={handleSelectEdgeFiles} accept=".csv" multiple hidden />
+            <Button onClick={() => nodeInputRef.current.click()} className="uploadBtn">
+              ADD NODE TABLES
+              <PlusOutlined className='add-icon' />
+              <input type="file" ref={nodeInputRef} onChange={handleSelectNodeFiles} accept=".csv" multiple hidden />
             </Button>
           </div>
-          {/* <div className="modalRow"> */}
-          <Col>
+        </div>
+        <div className="modalRow2">
+          <div className='listOut'>
             <ListGroup className="readyFiles">
               {
                 Object.entries(edgeFiles).map(([k, { data: file, name }]) => (
-                  <ListGroup.Item key={k}>
+                  <ListGroup.Item key={k} className='listItem'>
                     <div className="modalRowInner">
-                      <Input
-                        id="graphNameInput"
-                        data-key={k}
-                        onChange={(e) => {
-                          setName(e.target.value, k, 'edge');
-                        }}
-                        placeholder="edge name"
-                        defaultValue={name}
-                        required
-                      />
-                    </div>
-                    <div className="modalRowInner">
-                      <div>{file.name}</div>
-                      {/* <FontAwesomeIcon
-                        id="removeFile"
-                        data-id={k}
-                        onClick={() => removeEdgeFile(k)}
-                        icon={faMinusCircle}
-                      /> */}
+                      <img src="/resources/images/menu/csv.png" alt="Description" className='csvfile' />
+                      <div className='fileName'>{file.name}</div>
+                      <div className="inputOut">
+                        <Input
+                          id="graphNameInput"
+                          data-key={k}
+                          onChange={(e) => {
+                            setName(e.target.value, k, 'edge');
+                          }}
+                          placeholder="Edge Name"
+                          defaultValue={name}
+                          required
+                        />
+                      </div>
                       <DeleteTwoTone id="removeFile" data-id={k} className="largeIcon" twoToneColor="#eb2f96" onClick={() => removeEdgeFile(k)} />
                     </div>
                   </ListGroup.Item>
                 ))
             }
             </ListGroup>
-          </Col>
-          {/* </div> */}
+          </div>
+          <div className="BtnOuter">
+            <Button onClick={() => edgeInputRef.current.click()} className="uploadBtn">
+              ADD EDGE TABLES
+              <PlusOutlined className='add-icon' />
+              <input type="file" ref={edgeInputRef} onChange={handleSelectEdgeFiles} accept=".csv" multiple hidden />
+            </Button>
+          </div>
         </div>
+      </div>
+      <div className="clearOuter">
+        <Button id="clearButton" onClick={clearState}>
+          Clear
+        </Button>
+        <Button id="doneButton" onClick={handleSubmit}>
+          Done
+          <img src="/resources/images/menu/right.png" alt="Description" className='rightPng' />
+        </Button>
       </div>
       {/* <Divider /> */}
     </>
@@ -275,16 +267,23 @@ const InitGraphModal = () => {
 
   return (
     <div>
-      <div className="ModalContainer">
-        <div className="headerOuter">
-          <div id="headerRow">
-            <div className="title">Create a Graph</div>
-          </div>
-          <Divider />
-          <div className="modalCol">
-            {modalBody()}
-          </div>
-        </div>
+      <div className="ModalContainer2">
+        <Layout>
+          <Header className='edit-header'>
+            <AppHeader2 />
+          </Header>
+          <Content>
+            <div className="headerOuter">
+              <div id="headerRow">
+                <div className="title">Upload</div>
+              </div>
+
+              <div className="modalCol">
+                {modalBody()}
+              </div>
+            </div>
+          </Content>
+        </Layout>
       </div>
     </div>
 

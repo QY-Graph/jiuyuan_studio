@@ -1,0 +1,43 @@
+.searchTitle{
+  height: 60px;
+  line-height: 40px;
+  color: #2B3476;
+  font-size: 36px;
+  font-weight: 600;
+}
+
+.myeditor .editor-area{
+  padding: 0;
+}
+
+.myeditor {
+  background-color: transparent;
+  border: 1.5px solid #80BEFC;
+  border-radius: 10px;
+}
+
+.myeditor .editor-code-wrapper{
+  border: none;
+}
+
+.edit-main .container-fluid{
+  padding: 0 15px 0 40px;
+}
+
+.edit-main .card-header{
+  border-bottom: none;
+  // background-color: transparent;
+}
+
+.searchPng{
+  height: 27px;
+  width: 27px;
+}
+
+.myeditor .input-style{
+  width: 99% !important;
+}
+
+.mysearch{
+  margin-left: 10px !important;
+}

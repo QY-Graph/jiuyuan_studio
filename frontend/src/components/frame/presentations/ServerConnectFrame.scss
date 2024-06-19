@@ -1,0 +1,29 @@
+.form-login .ant-input{
+  background-color: #F5F5F7 !important;
+  padding-left: 20px !important;
+  font-weight: bold;
+}
+
+.form-login .ant-input:focus{
+  background-color: #fff !important;
+}
+
+
+.form-login .ant-form-item{
+ max-width: 500px;
+ margin-bottom: 40px;
+}
+
+.form-login .ant-input-affix-wrapper:focus, 
+.form-login .ant-input-affix-wrapper-focused{
+  box-shadow: 0 0 0 3px #80BEFC !important;
+}
+
+
+.form-login .ant-input-affix-wrapper-status-error:not(.ant-input-affix-wrapper-disabled):not(.ant-input-affix-wrapper-borderless).ant-input-affix-wrapper{
+  background: #F5F5F7;
+}
+
+.form-login .ant-input-affix-wrapper-status-error:not(.ant-input-affix-wrapper-disabled):not(.ant-input-affix-wrapper-borderless).ant-input-affix-wrapper:hover{
+  background: #fff;
+}

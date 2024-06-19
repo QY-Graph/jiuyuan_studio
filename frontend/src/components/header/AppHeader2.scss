@@ -1,0 +1,107 @@
+.header2{
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #ECECEE;
+}
+
+.header2 .myrow2{
+  width: 30%;
+  max-width: 300px;
+  max-width: 350px;
+}
+
+.header2 .mycol2{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 16px;
+}
+
+.header2 .colinner2{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.header2 .logo-img2{
+  width: 145px;
+  height: 76px;
+  margin-bottom: 10px;
+}
+
+.header2 .logo2{
+  width: 25%;
+  display: flex;
+  align-items: center;
+}
+
+.header2 .imgout2{
+  height: 40px;
+  width: 40px;
+}
+
+.header2 .icon12 {
+  margin-right: 8px;
+  display: inline-block;
+  width: 1.2em;
+  height: 1.2em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+
+.header2 .icon22 {
+  margin-right: 8px;
+  display: inline-block;
+  width: 1.3em;
+  height: 1.3em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+
+.header2 .Circle22{
+  height: 2.5em;
+  width: 2.5em;
+  position: absolute; /* 绝对定位 */
+  z-index: 1; /* 确保在下层 */
+  left: 50%;
+  // top: 50%;
+  transform: translateX(-50%);
+}
+
+.header2 .Circle222{
+  height: 1.3em;
+  width: 1.3em;
+  position: absolute; /* 相对定位 */
+  z-index: 2; /* 确保 logo 在背景之上 */
+  left: 50%;
+  margin-top: 8px;
+  // top: 50%;
+  transform: translateX(-50%);
+}
+
+.header2 .Circle32{
+  height: 1.1em;
+  width: 1.1em;
+  position: absolute; /* 相对定位 */
+  z-index: 2; /* 确保 logo 在背景之上 */
+  left: 50%;
+  margin-top: 9px;
+  transform: translateX(-50%);
+}
+
+.header2 .title12{
+  font-size: 16px;
+  line-height: 36px;
+  color: #BB3535;
+  font-weight: 500;
+}
+
+.header2 .title22{
+  font-size: 16px;
+  line-height: 36px;
+  font-weight: 500;
+}

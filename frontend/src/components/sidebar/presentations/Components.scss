@@ -2,12 +2,31 @@
 
 #graphSelectionContainer {
     position: relative;
+    padding: 0;
 }
 
 #graphSelection {
     display: flex;
 }
 
-.ant-select{
-    display: flex;
+#graphSelectionContainer .ant-select{
+  display: flex;
+  width: calc(100% - 20px);
+}
+
+#graphSelectionContainer .ant-select-selector{
+  border: none;
+  border-radius: 10px;
+  // background-color: #d4e1f9;
+}
+
+#graphSelectionContainer .ant-select-arrow{
+  display: none;
+}
+
+#graphSelectionContainer .ant-select-selection-item{
+  padding-left: 5px;
+  font-size: 22px;
+  color: #2B3476;
+  font-weight: 600;
 }

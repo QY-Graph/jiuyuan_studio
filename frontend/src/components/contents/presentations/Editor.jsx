@@ -30,6 +30,7 @@ import SideBarToggle from '../../editor/containers/SideBarMenuToggleContainer';
 import { setting } from '../../../conf/config';
 import IconPlay from '../../../icons/IconPlay';
 import { getMetaData } from '../../../features/database/MetadataSlice';
+import './Editor.scss';
 
 const Editor = ({
   setCommand,
@@ -144,18 +145,20 @@ const Editor = ({
 
   return (
     <div className="container-fluid">
-      <div className="editor">
-        <div className="container-fluid editor-area card-header">
+      <div className='searchTitle'>
+        Search
+      </div>
+      <div className="editor myeditor">
+        <div className="editor-area card-header">
           <div className="input-group input-style">
-
-            <div id="codeMirrorEditor" className="form-control col-11 editor-code-wrapper">
+            <div id="codeMirrorEditor" className="form-control editor-code-wrapper">
               <CodeMirror
                 onClick={onClick}
                 value={command}
                 onChange={setCommand}
               />
             </div>
-            <div className="input-group-append ml-auto editor-button-wrapper" id="editor-buttons">
+            <div className="input-group-append ml-auto editor-button-wrapper mysearch" id="editor-buttons">
               {/* <button className="frame-head-button btn btn-link"
                type="button" onClick={() => favoritesCommand()}>
                 <FontAwesomeIcon
@@ -163,12 +166,14 @@ const Editor = ({
                   size="lg"
                 />
               </button> */}
-              <button className={command ? 'btn show-eraser' : 'btn hide-eraser'} type="button" id="eraser" onDoubleClick={() => clearCommand()} aria-label="Clear Command">
+              {/* <button className={command ? 'btn show-eraser' : 
+              'btn hide-eraser'} type="button" id="eraser" onDoubleClick={() => clearCommand()} 
+              aria-label="Clear Command">
                 <FontAwesomeIcon
                   icon={faTimesCircle}
                   size="1x"
                 />
-              </button>
+              </button> */}
               <button
                 className="frame-head-button btn btn-link"
                 type="button"
@@ -176,14 +181,15 @@ const Editor = ({
                 title="Run Query"
                 aria-label="Run Query"
               >
-                <IconPlay />
+                {/* <IconPlay /> */}
+                <img src="/resources/images/menu/search.png" alt="Description" className='searchPng' />
               </button>
-              <button
+              {/* <button
                 className="frame-head-button btn btn-link"
                 type="button"
                 onClick={() => {
                   toggleMenu('home');
-                  /*
+                  
                   if (!isActive) {
                     document.getElementById('wrapper')?.classList?.remove('wrapper');
                     document.getElementById('wrapper')?.classList?.add('wrapper-extension-padding');
@@ -191,14 +197,14 @@ const Editor = ({
                     document.getElementById('wrapper')?
                     .classList?.remove('wrapper-extension-padding');
                     document.getElementById('wrapper')?.classList?.add('wrapper');
-                  } */
+                  } 
                 }}
                 title={(isActive) ? 'Hide' : 'Show'}
                 aria-label="toggleMenu"
               >
                 <SideBarToggle isActive={isActive} />
-              </button>
-              <button
+              </button> */}
+              {/* <button
                 className="frame-head-button btn btn-link"
                 type="button"
                 onClick={() => setLabel()}
@@ -209,7 +215,7 @@ const Editor = ({
                   icon={isLabel ? faToggleOn : faToggleOff}
                   size="2x"
                 />
-              </button>
+              </button> */}
             </div>
           </div>
         </div>

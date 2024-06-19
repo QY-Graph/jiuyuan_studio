@@ -38,3 +38,65 @@
   fill: currentColor;
   overflow: hidden;
 }
+
+.rowout{
+  height: calc(28%);
+}
+
+.myrow{
+  padding: 0 5% 0 10%;
+  height: 100%;
+}
+
+.mycol{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.colinner{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.Circle{
+  height: 3em;
+  width: 3em;
+  position: absolute; /* 绝对定位 */
+  z-index: 1; /* 确保在下层 */
+  left: 50%;
+  // top: 50%;
+  transform: translateX(-50%);
+}
+
+.Circle2{
+  height: 1.6em;
+  width: 1.6em;
+  position: absolute; /* 相对定位 */
+  z-index: 2; /* 确保 logo 在背景之上 */
+  left: 50%;
+  margin-top: 10px;
+  // top: 50%;
+  transform: translateX(-50%);
+}
+
+.imgout{
+  height: 50px;
+  width: 50px;
+}
+
+.activetitle{
+  padding-top: 20px;
+  font-size: 22px;
+  color: #000;
+  font-weight: bold;
+}
+
+.deactivetitle{
+  padding-top: 20px;
+  font-size: 22px;
+  color: #AAB2C8;
+  font-weight: bold;
+}

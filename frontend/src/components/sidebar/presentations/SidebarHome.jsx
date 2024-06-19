@@ -17,10 +17,10 @@
  * under the License.
  */
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-
-import { Modal } from 'antd';
+import { CaretRightOutlined } from '@ant-design/icons';
+import { Modal, Button, Collapse } from 'antd';
 import uuid from 'react-uuid';
 import { connect, useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -28,6 +28,7 @@ import { faRedo, faTimes } from '@fortawesome/free-solid-svg-icons';
 import {
   VerticalLine, HorizontalLine, SubLabelLeft, SubLabelRight, GraphSelectDropdown,
 } from './SidebarComponents';
+import './Sidebar.scss';
 
 // TODO: keep only the cypher query without "select * .."
 const genLabelQuery = (eleType, labelName, database) => {
@@ -82,11 +83,9 @@ const NodeList = ({ nodes, setCommand }) => {
     ));
     return (
       <div style={{
-        display: 'flex',
         flexWrap: 'wrap',
-        height: '80px',
-        overflowY: 'auto',
-        marginTop: '12px',
+        height: 'calc(100% - 2px)',
+        overflowY: 'scroll',
       }}
       >
         {list}
@@ -110,16 +109,13 @@ const NodeItems = connect((state) => ({
   ({
     label, cnt, setCommand, database,
   }) => (
-    <button
-      type="button"
-      className="node-item"
-      onClick={() => setCommand(genLabelQuery('node', label, database))}
-    >
+    <div className='node-item' onClick={() => setCommand(genLabelQuery('node', label, database))}>
+      <img src="/resources/images/menu/csv.png" alt="Description" className='csvfile' />
       {label}
       (
       {cnt}
       )
-    </button>
+    </div>
   ),
 );
 NodeItems.propTypes = {
@@ -144,11 +140,9 @@ const EdgeList = ({ edges, setCommand }) => {
     ));
     return (
       <div style={{
-        display: 'flex',
         flexWrap: 'wrap',
-        height: '80px',
-        overflowY: 'auto',
-        marginTop: '12px',
+        height: 'calc(100% - 2px)',
+        overflowY: 'scroll',
       }}
       >
         {list}
@@ -171,16 +165,13 @@ const EdgeItems = connect((state) => ({
 }), {})(({
   label, cnt, setCommand, database,
 }) => (
-  <button
-    type="button"
-    className="edge-item"
-    onClick={() => setCommand(genLabelQuery('edge', label, database))}
-  >
+  <div className='node-item' onClick={() => setCommand(genLabelQuery('edge', label, database))}>
+    <img src="/resources/images/menu/csv.png" alt="Description" className='csvfile' />
     {label}
     (
     {cnt}
     )
-  </button>
+  </div>
 ));
 EdgeItems.propTypes = {
   database: PropTypes.shape({
@@ -351,6 +342,8 @@ DBMSText.propTypes = {
   graph: PropTypes.string.isRequired,
 };
 
+const { Panel } = Collapse;
+
 const SidebarHome = ({
   edges,
   nodes,
@@ -383,28 +376,76 @@ const SidebarHome = ({
     getMetaData({ currentGraph });
   };
 
+  // 控制展开的面板
+  const [activeKey, setActiveKey] = useState(['1', '2']);
+  // 处理全部展开和收起
+  const handleToggleExpand = () => {
+    if (activeKey.length === 2) {
+      setActiveKey([]);
+    } else {
+      setActiveKey(['1', '2']);
+    }
+  };
+
   return (
-    <div className="sidebar-home">
+    <div className="sidebar-home mysidebar">
       <div className="sidebar sidebar-body">
-        <div className="form-group sidebar-item">
-          <b>Node Label</b>
+        <div className='graphPick'>
+          { !isLabel && (
+            <>
+              <div className="sidebar-item-disconnect-buttons">
+                <GraphSelectDropdown
+                  currentGraph={currentGraph}
+                  graphs={graphs}
+                  changeCurrentGraph={changeCurrentGraph}
+                  changeGraphDB={changeGraph}
+                />
+              </div>
+            </>
+          ) }
+          <div>
+            <Button type="primary" onClick={() => refreshSidebarHome()}>
+              <img src="/resources/images/menu/refresh.png" alt="Description" className='btnimg' />
+            </Button>
+            <Button type="primary" onClick={() => handleToggleExpand()}>
+              <img 
+                src="/resources/images/menu/open.png" 
+                alt="Description" 
+                className={`btnimg2 ${activeKey.length === 2 ? 'rotated' : ''}`} 
+              />
+            </Button>
+          </div>
+        </div>
+        <Collapse
+          bordered={false}
+          activeKey={activeKey}
+          defaultActiveKey={['1', '2']}
+          expandIcon={({ isActive }) => <CaretRightOutlined rotate={isActive ? 90 : 0} />}
+          className="site-collapse-custom-collapse"
+        >
+          <Panel header="Node Label" key="1" className='nodelabel'>
+            <NodeList nodes={nodes} setCommand={setCommand} />
+          </Panel>
+          <Panel header="Edge Label" key="2" className='nodelabel'>
+            <EdgeList edges={edges} setCommand={setCommand} />
+          </Panel>
+        </Collapse>
+        {/* <div className="form-group sidebar-item">
+          <div className='nodelabel'>Node Label</div>
           <br />
           <NodeList nodes={nodes} setCommand={setCommand} />
         </div>
-        <VerticalLine />
+
         <div className="form-group sidebar-item">
-          <b>Edge Label</b>
+          <div className='nodelabel'>Edge Label</div>
           <br />
           <EdgeList edges={edges} setCommand={setCommand} />
-        </div>
-        <VerticalLine />
-        <div className="form-group sidebar-item">
+        </div> */}
+
+        {/* <div className="form-group sidebar-item">
           <b>Properties</b>
           <br />
           <PropertyList propertyKeys={propertyKeys} setCommand={setCommand} />
-        </div>
-        <div id="lastHorizontalLine">
-          <VerticalLine />
         </div>
         { isLabel && (
           <>
@@ -418,28 +459,13 @@ const SidebarHome = ({
                 changeGraph={changeGraph}
               />
             </div>
-            <div id="lastHorizontalLine">
-              <VerticalLine />
-            </div>
           </>
-        ) }
+        ) } */}
       </div>
-      <div className="sidebar-item-disconnect-outer">
+      {/* <div className="sidebar-item-disconnect-outer">
         <div className="form-group sidebar-item-disconnect">
           <div className="sidebar-item-disconnect-buttons">
-            <button
-              className="frame-head-button refresh_button btn btn-link"
-              type="button"
-              onClick={() => refreshSidebarHome()}
-              aria-label="Refresh Button"
-            >
-              <FontAwesomeIcon
-                icon={faRedo}
-                size="1x"
-                color="white"
-                flip="horizontal"
-              />
-            </button>
+
             <br />
             <b>Refresh</b>
           </div>
@@ -469,21 +495,9 @@ const SidebarHome = ({
             <br />
             <b>Close Session</b>
           </div>
-          { !isLabel && (
-            <>
-              <HorizontalLine />
-              <div className="sidebar-item-disconnect-buttons">
-                <GraphSelectDropdown
-                  currentGraph={currentGraph}
-                  graphs={graphs}
-                  changeCurrentGraph={changeCurrentGraph}
-                  changeGraphDB={changeGraph}
-                />
-              </div>
-            </>
-          ) }
+          
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
