@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import {
-  Layout, Col, Input, Row,
+  Layout, Col, Input, Row, Modal,
 } from 'antd';
+import { ExclamationCircleOutlined } from '@ant-design/icons';
+import { disconnectToDatabase } from '../../features/database/DatabaseSlice';
+import { resetMetaData } from '../../features/database/MetadataSlice';
 import './AppHeader2.scss';
 
 const { Header } = Layout;
+const { confirm } = Modal;
 
 const AppHeader = () => {
   const [current, setCurrent] = useState('1');
@@ -35,10 +40,31 @@ const AppHeader = () => {
   };
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const handleClick = (index) => () => {
     console.log(index);
     if (index === 1) {
-
+      confirm({
+        title: '确定要断开连接吗？',
+        icon: <ExclamationCircleOutlined />,
+        content: '断开后将需要重新连接才能访问数据库。',
+        okText: '断开',
+        okType: 'danger',
+        cancelText: '取消',
+        onOk() {
+          dispatch(disconnectToDatabase()).then((response) => {
+            if (response.type === 'database/disconnectToDatabase/fulfilled') {
+              localStorage.removeItem('databaseStatus');
+              resetMetaData();
+              navigate('/connect');
+            }
+          });
+        },
+        onCancel() {
+          console.log('Cancel');
+        },
+      });
     } else if (index === 3) {
       navigate('/editor');
     } else if (index === 2) {

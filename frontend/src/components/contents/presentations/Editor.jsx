@@ -21,6 +21,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import uuid from 'react-uuid';
 import PropTypes from 'prop-types';
+import { message } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimesCircle, faToggleOff, faToggleOn } from '@fortawesome/free-solid-svg-icons';
 import store from '../../../app/store';
@@ -220,7 +221,7 @@ const Editor = ({
           </div>
         </div>
       </div>
-      {alerts}
+      {/* {alerts} */}
     </div>
   );
 };
