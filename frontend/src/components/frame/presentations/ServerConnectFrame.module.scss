@@ -159,9 +159,10 @@
 }
 
 .FormTitle{
-  width: 100%;
-  padding:  0 10%;
-  margin-bottom: 30px;
+  // width: 100%;
+  // padding:  0 10%;
+  // padding-right: 10%;
+  margin-bottom: 40px;
 }
 
 .FormTitle1{
@@ -178,3 +179,12 @@
 // .FormItemOut{
 //   position: relative;
 // }
+
+
+@media only screen and (min-width: 1921px) {
+  .LogoImage{
+    width: 128px;
+    height: 128px;
+  }
+  
+}

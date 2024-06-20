@@ -28,7 +28,7 @@ import {
   faTimes,
   faClone,
 } from '@fortawesome/free-solid-svg-icons';
-import { Button, Popover } from 'antd';
+import { Button, Popover, Modal } from 'antd';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import styles from './Frame.module.scss';
@@ -39,6 +39,7 @@ import EdgeWeight from '../../icons/EdgeWeight';
 import IconFilter from '../../icons/IconFilter';
 import IconSearchCancel from '../../icons/IconSearchCancel';
 
+// const { confirm } = Modal;
 const Frame = ({
   reqString,
   children,
@@ -69,6 +70,22 @@ const Frame = ({
   //   </Menu>
   // );
 
+  const handleRemove = () => {
+    Modal.confirm({
+      title: 'Are you sure you want to close this window?',
+      onOk() {
+        dispatch(removeFrame(refKey));
+        dispatch(removeActiveRequests(refKey));
+      },
+      onCancel() {
+        // 可以在这里处理取消的逻辑，如果没有需要则留空
+      },
+      okText: 'Yes',
+      cancelText: 'No',
+      className: styles.customModalClass, // 如果需要自定义模态框的样式
+    });
+  };
+
   return (
     <div className={`${styles.Frame} ${isFullScreen ? styles.FullScreen : ''}`}>
       <div className={styles.FrameHeader}>
@@ -90,8 +107,8 @@ const Frame = ({
             }}
           />
         </div>
-        {/* <div className={styles.ButtonArea}>
-          {
+        <div className={styles.ButtonArea}>
+          {/* {
             !isTable && onRefresh ? (
               <Button
                 size="large"
@@ -106,8 +123,25 @@ const Frame = ({
                 />
               </Button>
             ) : null
-          }
-        </div> */}
+          } */}
+          <Button
+            size="large"
+            type="link"
+            className={`${styles.FrameButton}`}
+            onClick={handleRemove}
+            //   () => {
+            //   if (window.confirm('Are you sure you want to close this window?')) {
+            //     dispatch(removeFrame(refKey));
+            //     dispatch(removeActiveRequests(refKey));
+            //   } else {
+            //     // Do nothing!
+            //   }
+            // }}
+            title="Close Window"
+          >
+            <FontAwesomeIcon icon={faTimes} size="lg" />
+          </Button>
+        </div>
       </div>
       <div
         className={`${styles.FrameBody} ${isExpand ? '' : styles.Contract} ${

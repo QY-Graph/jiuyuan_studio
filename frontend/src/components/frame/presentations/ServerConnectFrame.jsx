@@ -130,7 +130,7 @@ const ServerConnectFrame = ({
           <div className={styles.Mask} />
           {/* 添加遮罩层 */}
           <img src="/resources/images/bgjy.jpg" alt="Description" className={styles.MyImage} />
-          <img src="/resources/images/jylogo.png" alt="Description" className={styles.LogoImage} />
+          <img src="/resources/images/jylogo2.png" alt="Description" className={styles.LogoImage} />
         </Col>
         <Col span={14} className={styles.ColRight}>
           <AppHeader />
