@@ -31,7 +31,7 @@ import {
 import { Button, Popover } from 'antd';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import styles from './Frame.module.scss';
+import styles from './Frame2.module.scss';
 import { removeFrame } from '../../features/frame/FrameSlice';
 import { setCommand } from '../../features/editor/EditorSlice';
 import { removeActiveRequests } from '../../features/cypher/CypherSlice';

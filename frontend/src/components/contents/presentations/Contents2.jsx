@@ -45,7 +45,13 @@ const Contents = ({
   return (
     <div className={`${styles.Content} ${isActive ? styles.Expanded : ''}`}>
       <div>
-        <FramesContainer />
+        <div className={`${styles.searchResult}`}>
+          <div className={`${styles.searchIcon}`} />
+          Search Results
+        </div>
+        <div className={`${styles.frameOut}`}>
+          <FramesContainer />
+        </div>
       </div>
     </div>
   );

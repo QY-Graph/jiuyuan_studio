@@ -105,12 +105,14 @@ const CypherResultTable = ({ data, ...props }) => {
   const { refKey, setIsTable } = props;
   return (
     <div className="legend-area">
+      <div>
+        <CypherResultTab refKey={refKey} setIsTable={setIsTable} currentTab="table" />
+      </div>
       <div className="contianer-frame-tab">
-        <div style={{ width: '80%', color: '#C4C4C4' }}>
+        {/* <div style={{ width: '80%', color: '#C4C4C4' }}>
           <div className="d-flex nodeLegend">Node:</div>
           <div className="d-flex edgeLegend">Edge:</div>
-        </div>
-        <CypherResultTab refKey={refKey} setIsTable={setIsTable} currentTab="table" />
+        </div> */}
       </div>
       <Table columns={localColumns} dataSource={localRows} />
     </div>

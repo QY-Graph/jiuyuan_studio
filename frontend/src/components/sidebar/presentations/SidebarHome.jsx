@@ -34,17 +34,15 @@ import './Sidebar.scss';
 const genLabelQuery = (eleType, labelName, database) => {
   if (eleType === 'node') {
     if (labelName === '*') {
-      // eslint-disable-next-line quotes
-      return `MATCH (V) RETURN V;`;
+      return 'MATCH (V) RETURN V';
     }
-    return `MATCH (V:${labelName}) RETURN V $$) as (V agtype);`;
+    return `MATCH (V:${labelName}) RETURN V`;
   }
   if (eleType === 'edge') {
     if (labelName === '*') {
-      // eslint-disable-next-line quotes
-      return `MATCH (V)-[R]-(V2) RETURN V,R,V2 $$) as (V agtype, R agtype, V2 agtype);`;
+      return 'MATCH (V)-[R]-(V2) RETURN V,R,V2';
     }
-    return `MATCH (V)-[R:${labelName}]-(V2) RETURN V,R,V2 $$) as (V agtype, R agtype, V2 agtype);`;
+    return `MATCH (V)-[R:${labelName}]-(V2) RETURN V,R,V2`;
   }
 
   return '';

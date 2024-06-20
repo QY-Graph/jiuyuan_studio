@@ -27,11 +27,12 @@ const Sidebar = ({ activeMenuName, isActive }) => (
     <div className="tab-content">
       <div className={`tab-pane fade${activeMenuName === 'home' ? ' active show ' : ''}`} role="tabpanel" aria-labelledby="side-home-tab">
         <SidebarHome />
-        <SidebarSetting />
+        {/* <SidebarSetting /> */}
       </div>
-      <div className={`tab-pane fade${activeMenuName === 'setting' ? ' active show ' : ''}`} role="tabpanel" aria-labelledby="side-setting-tab">
+      {/* <div className={`tab-pane fade${activeMenuName === 'setting' ? ' active show ' : ''}`} 
+      role="tabpanel" aria-labelledby="side-setting-tab">
         <SidebarSetting />
-      </div>
+      </div> */}
     </div>
   </div>
 );

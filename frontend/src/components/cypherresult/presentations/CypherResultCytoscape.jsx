@@ -369,13 +369,15 @@ const CypherResultCytoscape = forwardRef((props, ref) => {
 
   return (
     <div className="chart-frame-area">
+      <div>
+        <CypherResultTab refKey={props.refKey} setIsTable={props.setIsTable} currentTab="graph" />
+      </div>
       <div className="contianer-frame-tab">
         <CypherResultCytoscapeLegend
           onLabelClick={getFooterData}
           isReloading={isReloading}
           legendData={legendData}
         />
-        <CypherResultTab refKey={props.refKey} setIsTable={props.setIsTable} currentTab="graph" />
       </div>
       <CypherResultCytoscapeChart
         onElementsMouseover={getFooterData}

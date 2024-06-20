@@ -18,11 +18,13 @@
  */
 
 /* eslint-disable react/react-in-jsx-scope */
+import { Tabs } from 'antd';
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTable } from '@fortawesome/free-solid-svg-icons';
 import IconGraph from '../../icons/IconGraph';
+import './Cypher.scss';
 
 class CypherResultTab extends Component {
   constructor(props) {
@@ -47,36 +49,63 @@ class CypherResultTab extends Component {
         document.getElementById(`${refKey}-graph`).classList.remove('selected-frame-tab');
       }
     };
+
+    const handleTabChange = (activeKey) => {
+      if (activeKey === '1') {
+        activeTab(this.refKey, 'graph');
+        this.setIsTable(false);
+      } else if (activeKey === '2') {
+        this.setIsTable(true);
+        activeTab(this.refKey, 'table');
+      }
+    };
+
+    const { currentTab } = this.props; 
+    // 将currentTab转换为对应的Tab key
+    const getActiveKey = () => {
+      // currentTab = this.props.currentTab;
+      console.log(currentTab);
+      return currentTab === 'graph' ? '1' : '2';
+    };
+
     return (
       <div className="legend-button-area">
-        <button
+        {/* Current Tab: 
+        {currentTab} */}
+        <Tabs activeKey={getActiveKey()} onChange={handleTabChange}>
+          <Tabs.TabPane tab="&nbsp;&nbsp;graph&nbsp;&nbsp;" key="1" />
+          <Tabs.TabPane tab="&nbsp;&nbsp;table&nbsp;&nbsp;" key="2" />
+        </Tabs>
+        {/* <button
           className="btn"
           type="button"
-          style={{ width: '50%', fontSize: '14px', color: this.currentTab === 'graph' ? '#142B80' : '#495057' }}
+          style={{ width: '50%', fontSize: '14px', color: this.currentTab === 'graph' 
+          ? '#142B80' : '#495057' }}
           onClick={() => { activeTab(this.refKey, 'graph'); this.setIsTable(false); }}
         >
           <IconGraph />
           <br />
           <b style={{ fontSize: '14px;' }}>Graph</b>
-        </button>
-        <div
+        </button> */}
+        {/* <div
           style={{
             backgroundColor: '#C4C4C4',
             width: '1px',
             height: '76px',
             marginTop: '20px',
           }}
-        />
-        <button
+        /> */}
+        {/* <button
           className="btn"
           type="button"
-          style={{ width: '50%', fontSize: '14px', color: this.currentTab === 'table' ? '#142B80' : '#495057' }}
+          style={{ width: '50%', fontSize: '14px', color: this.currentTab === 'table' 
+            ? '#142B80' : '#495057' }}
           onClick={() => { activeTab(this.refKey, 'table'); this.setIsTable(true); }}
         >
           <FontAwesomeIcon icon={faTable} style={{ fontSize: '25px' }} />
           <br />
           <b style={{ fontSize: '14px;' }}>Table</b>
-        </button>
+        </button> */}
       </div>
     );
   }

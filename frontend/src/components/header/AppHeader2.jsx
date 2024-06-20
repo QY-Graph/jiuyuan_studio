@@ -37,7 +37,9 @@ const AppHeader = () => {
   const navigate = useNavigate();
   const handleClick = (index) => () => {
     console.log(index);
-    if (index === 3) {
+    if (index === 1) {
+
+    } else if (index === 3) {
       navigate('/editor');
     } else if (index === 2) {
       navigate('/upload');

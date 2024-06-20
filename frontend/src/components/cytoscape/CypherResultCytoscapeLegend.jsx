@@ -23,6 +23,7 @@ import { Badge } from 'react-bootstrap';
 import uuid from 'react-uuid';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
+import './Cypher.scss';
 
 class CypherResultCytoscapeLegend extends Component {
   constructor(props) {
@@ -171,15 +172,15 @@ class CypherResultCytoscapeLegend extends Component {
     edgeBadges.forEach((value) => edgeLedgend.push(value));
 
     return (
-      <div className="legend-area">
+      <div className="legend-area mylegend">
         <div className="d-flex nodeLegend">
           <div className={`mr-auto legends legend ${nodeLegendExpanded ? 'expandedLegend' : ''}`}>
-            <span>Node: </span>
+            <span className='legendText'>Node: </span>
             {nodeLedgend}
           </div>
           <button
             type="button"
-            className="frame-head-button btn btn-link px-3"
+            className="frame-head-button btn btn-link px-3 openBtn"
             onClick={() => this.setState({ nodeLegendExpanded: !nodeLegendExpanded })}
             aria-label="Node Legend"
           >
@@ -190,12 +191,12 @@ class CypherResultCytoscapeLegend extends Component {
         </div>
         <div className="d-flex edgeLegend">
           <div className={`mr-auto legends legend ${edgeLegendExpanded ? 'expandedLegend' : ''}`}>
-            <span>Edge: </span>
+            <span className='legendText'>Edge: </span>
             {edgeLedgend}
           </div>
           <button
             type="button"
-            className="frame-head-button btn btn-link px-3"
+            className="frame-head-button btn btn-link px-3 openBtn"
             onClick={() => this.setState({ edgeLegendExpanded: !edgeLegendExpanded })}
             aria-label="Edge Legend"
           >

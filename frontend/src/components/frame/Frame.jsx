@@ -77,6 +77,8 @@ const Frame = ({
           <strong>
             {reqString}
           </strong>
+        </div>
+        <div>
           <FontAwesomeIcon
             id={styles.toEditor}
             title="copy to editor"
@@ -88,76 +90,7 @@ const Frame = ({
             }}
           />
         </div>
-        <div className={styles.ButtonArea}>
-          {!isTable && onThick ? (
-            <Popover placement="bottomLeft" content={thicnessMenu} trigger="click">
-              <Button
-                size="large"
-                type="link"
-                className={styles.FrameButton}
-                title="Edge Weight"
-                onClick={() => onThick()}
-              >
-                <EdgeWeight />
-              </Button>
-            </Popover>
-          ) : null}
-          {onSearchCancel ? (
-            <Button
-              size="large"
-              type="link"
-              className={styles.FrameButton}
-              onClick={() => onSearchCancel()}
-              title="Cancel Search"
-            >
-              <IconSearchCancel />
-            </Button>
-          ) : null}
-          {onSearch ? (
-            <Button
-              size="large"
-              type="link"
-              className={styles.FrameButton}
-              onClick={() => onSearch()}
-              title="Filter/Search"
-            >
-              <IconFilter />
-            </Button>
-          ) : null}
-          {/* {false ? ( // en:Functionality is hidden due to */}
-          {/* functional problems // ko:기능이 동작하지 않아 감춤 */}
-          {/*  <Dropdown */}
-          {/*    trigger={['click']} */}
-          {/*    overlay={downloadMenu} */}
-          {/*  > */}
-          {/*    <Button */}
-          {/*      size="large" */}
-          {/*      type="link" */}
-          {/*      className={styles.FrameButton} */}
-          {/*    > */}
-          {/*      <FontAwesomeIcon */}
-          {/*        icon={faDownload} */}
-          {/*        size="lg" */}
-          {/*      /> */}
-          {/*      <FontAwesomeIcon icon={faAngleDown} /> */}
-          {/*    </Button> */}
-          {/*  </Dropdown> */}
-          {/* ) */}
-          {/*  : null} */}
-          <Button
-            size="large"
-            type="link"
-            className={`${styles.FrameButton} ${
-              isFullScreen ? styles.activate : ''
-            }`}
-            onClick={() => setFullScreen(!isFullScreen)}
-            title="Expand"
-          >
-            <FontAwesomeIcon
-              icon={isFullScreen ? faCompressAlt : faExpandAlt}
-              size="lg"
-            />
-          </Button>
+        {/* <div className={styles.ButtonArea}>
           {
             !isTable && onRefresh ? (
               <Button
@@ -174,45 +107,7 @@ const Frame = ({
               </Button>
             ) : null
           }
-          {/* <Button
-            size="large"
-            type="link"
-            className={`${styles.FrameButton} ${isPinned ? styles.activate : ''}`}
-            onClick={() => pinFrame(refKey)}
-          >
-          <FontAwesomeIcon icon={faPaperclip}
-              size="lg"
-            />
-          </Button> */}
-          <Button
-            size="large"
-            type="link"
-            className={`${styles.FrameButton}`}
-            onClick={() => setExpand(!isExpand)}
-            title={isExpand ? 'Hide' : 'Show'}
-          >
-            <FontAwesomeIcon
-              icon={isExpand ? faAngleUp : faAngleDown}
-              size="lg"
-            />
-          </Button>
-          <Button
-            size="large"
-            type="link"
-            className={`${styles.FrameButton}`}
-            onClick={() => {
-              if (window.confirm('Are you sure you want to close this window?')) {
-                dispatch(removeFrame(refKey));
-                dispatch(removeActiveRequests(refKey));
-              } else {
-                // Do nothing!
-              }
-            }}
-            title="Close Window"
-          >
-            <FontAwesomeIcon icon={faTimes} size="lg" />
-          </Button>
-        </div>
+        </div> */}
       </div>
       <div
         className={`${styles.FrameBody} ${isExpand ? '' : styles.Contract} ${

@@ -44,7 +44,7 @@ const Contents = ({
 
   return (
     <div className={`${styles.Content} ${isActive ? styles.Expanded : ''}`}>
-      <div>
+      <div className={`${styles.oovvv}`}>
         <FramesContainer />
       </div>
     </div>

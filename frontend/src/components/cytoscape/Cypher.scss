@@ -1,0 +1,82 @@
+.legend-button-area{
+  width: 100%;
+  border: none;
+  padding: 0 20px;
+  height: 120px;
+  padding: 10px 15px 0 15px;
+}
+
+.legend-button-area .ant-tabs{
+  width: 100%;
+}
+
+.legend-button-area .ant-tabs-tab{
+  margin-left: 20px; 
+}
+
+.legend-button-area .ant-tabs-tab + .ant-tabs-tab{
+  margin: 0 0 0 48px;
+}
+
+// .legend-button-area .ant-tabs-content-holder,
+// .legend-button-area .ant-tabs-content,
+// .legend-button-area .ant-tabs-content-top{
+//   display: none;
+// }
+.legend-button-area .ant-tabs-tab-btn{
+  font-size: 16px;
+  color: #AAB2C8;
+  font-weight: 600;
+}
+
+.legend-button-area .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn{
+  color: #000022;
+}
+
+// #1F64FF
+
+.mylegend .nodeLegend, .edgeLegend{
+  background-color: transparent;
+  border-bottom: none;
+}
+
+.mylegend .nodeLabel,
+.mylegend .edgeLabel{
+  border-radius: 5px;
+  font-size: 14px;
+  padding: 4px 10px !important;
+  color: #fff !important;
+}
+
+.mylegend{
+  padding: 0 20px;
+}
+
+.legendText{
+  color: #AAB2C8;
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.openBtn{
+  height: 40px;
+}
+
+.myfooter{
+  padding: 6px 20px;
+  border-top: none;
+  background: linear-gradient(360deg, rgba(238, 238, 246, 0) 0%, #EEEEF6 100%);
+}
+
+.layoutText{
+  color: #868AA5;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+#selectLayout{
+  border: 1px solid #AAB2C8;margin-right: 20px;
+  font-size: 0.8rem;
+  color: #2F3367;
+  font-weight: 600;
+}

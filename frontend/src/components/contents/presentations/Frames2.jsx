@@ -86,6 +86,7 @@ const Frames = ({
       if (frame.frameName === 'CypherResultFrame') {
         if (queryResult[frame.frameProps.key]?.complete && (queryResult[frame.frameProps.key].command !== null ? queryResult[frame.frameProps.key].command.toUpperCase() : 'NULL')
           .match('(ERROR|GRAPH|CREATE|UPDATE|COPY|NULL).*')) {
+          console.log('aaaaaaaaaa');
           return (
             <CypherResult
               key={frame.frameProps.key}
@@ -95,6 +96,7 @@ const Frames = ({
             />
           );
         }
+        console.log('bbbbbbbbbbbbb');
         return (
           <CypherGraphResult
             key={frame.frameProps.key}

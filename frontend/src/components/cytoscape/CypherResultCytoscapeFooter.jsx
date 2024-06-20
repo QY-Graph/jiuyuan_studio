@@ -29,6 +29,7 @@ import {
   updateLabelColor,
   updateNodeLabelSize,
 } from '../../features/cypher/CypherUtil';
+import './Cypher.scss';
 
 const CypherResultCytoscapeFooter = ({
   footerData,
@@ -100,7 +101,7 @@ const CypherResultCytoscapeFooter = ({
               icon={footerExpanded ? faAngleUp : faAngleDown}
             />
           </button>
-          Layout :&nbsp;
+          <span className='layoutText'>Layout &nbsp;</span>
           <select
             id="selectLayout"
             className="col-2 custom-select custom-select-sm layout-select"
@@ -135,7 +136,7 @@ const CypherResultCytoscapeFooter = ({
             {' '}
             edges
           </div>
-          Layout :&nbsp;
+          <span className='layoutText'>Layout &nbsp;</span>
           <select
             id="selectLayout"
             className="col-2 custom-select custom-select-sm layout-select"
@@ -304,7 +305,7 @@ const CypherResultCytoscapeFooter = ({
               icon={footerExpanded ? faAngleUp : faAngleDown}
             />
           </button>
-          Layout :&nbsp;
+          <span className='layoutText'>Layout &nbsp;</span>
           <select
             id="selectLayout"
             className="col-2 custom-select custom-select-sm layout-select"
@@ -330,7 +331,9 @@ const CypherResultCytoscapeFooter = ({
     return (
       <div className="d-flex pl-3">
         <div className="mr-auto label pl-3" />
-        <div className="px-1">Layout : </div>
+        <div className="px-1">
+          <span className='layoutText'>Layout &nbsp; </span>
+        </div>
         <select
           id="selectLayout"
           className="col-2 custom-select custom-select-sm layout-select"
@@ -355,7 +358,7 @@ const CypherResultCytoscapeFooter = ({
   };
 
   return (
-    <div className="chart-footer-area text-muted">
+    <div className="chart-footer-area text-muted myfooter">
       {displayFooterData()}
     </div>
   );
