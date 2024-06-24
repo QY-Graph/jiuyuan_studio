@@ -109,7 +109,7 @@ const InitGraphModal = () => {
           throw resData;
         } else {
           // setShow(false);
-          message.success('上传成功，请到 Search 标签使用！');
+          message.success('Upload successful, please go to the Search tab to use it!');
           dispatch(addAlert('CreateGraphSuccess'));
           dispatch(getMetaData()).then(() => {
             dispatch(changeCurrentGraph({ name: graphName }));
@@ -120,7 +120,7 @@ const InitGraphModal = () => {
       })
       .catch((err) => {
         console.log('error', err);
-        message.error('上传失败，请检查参数重新尝试！');
+        message.error('Upload failed, please check the parameters and try again.');
         setLoading(false);
         setError(err);
       });

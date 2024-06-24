@@ -818,6 +818,15 @@ textarea.editorTextarea
     justify-content: center;
 }
 
+.modal-content{
+  border-radius: 0;
+}
+
+.warning-icon{
+  color: #faad14;
+  margin-right: 10px;
+}
+
 .tutorial-modal {
     position: absolute;
     top: 50%;

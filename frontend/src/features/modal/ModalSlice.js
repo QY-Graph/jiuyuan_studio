@@ -31,6 +31,7 @@ const ModalSlice = createSlice({
   reducers: {
     openModal: {
       reducer: (state) => {
+        console.log('openModal');
         state.isOpen = true;
       },
     },

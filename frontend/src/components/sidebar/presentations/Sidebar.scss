@@ -16,6 +16,14 @@
   margin: 0 0 0 15px;
 }
 
+.graphName{
+  height: 50px;
+  line-height: 40px;
+  color: #2B3476;
+  font-size: 28px;
+  font-weight: 600;
+  padding-left: 10px;
+}
 .graphPick{
   height: 50px;
   display: flex;
@@ -103,22 +111,29 @@
 
 .graphPick .ant-btn{
   padding: 4px;
-  height: 25px;
-  width: 25px;
+  height: 30px;
+  width: 30px;
   line-height: 13px;
   border-radius: 5px;
   margin-right: 4px;
   margin-bottom: 4px;
 }
 
+.graphPick .imgout{
+  display: flex;
+  width: 80px;
+  align-items: center;
+}
+
 .graphPick .btnimg{
-  height: 10px;
-  width: 10px;
+  height: 15px;
+  width: 15px;
 }
 
 .graphPick .btnimg2{
-  height: 5px;
-  width: 10px;
+  height: 10px;
+  width: 15px;
+  margin-bottom: 1px;
   transition: transform 0.3s ease-in-out; // 平滑过渡效果
 }
 

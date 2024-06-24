@@ -57,7 +57,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://172.22.162.213:8090",
+  "proxy": "http://172.22.162.206:8090",
   "proxyy": "http://127.0.0.1:3001",
   "browserslist": {
     "production": [

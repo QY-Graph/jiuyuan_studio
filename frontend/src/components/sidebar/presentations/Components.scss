@@ -12,6 +12,8 @@
 #graphSelectionContainer .ant-select{
   display: flex;
   width: calc(100% - 20px);
+  box-shadow: 0 0 0 2px rgba(24,144,255,0.2);
+  border-radius: 10px;
 }
 
 #graphSelectionContainer .ant-select-selector{
@@ -29,4 +31,23 @@
   font-size: 22px;
   color: #2B3476;
   font-weight: 600;
+}
+
+.itemStyle{
+  position: absolute;
+  width: 7px;
+  height: 12px;
+  background-color: #2B3476;
+  z-index: 2;
+  top: 14px;
+}
+
+.selectItem{
+  font-size: 16px;
+}
+
+.graphSelectr .ant-select-item-option {
+  font-size: 16px;
+  line-height: 30px;
+
 }

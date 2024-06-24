@@ -378,6 +378,7 @@ const SidebarHome = ({
   return (
     <div className="sidebar-home mysidebar">
       <div className="sidebar sidebar-body">
+        <div className='graphName'>Graph Name</div>
         <div className='graphPick'>
           { !isLabel && (
             <>
@@ -391,7 +392,7 @@ const SidebarHome = ({
               </div>
             </>
           ) }
-          <div>
+          <div className='imgout'>
             <Button type="primary" onClick={() => refreshSidebarHome()}>
               <img src="/resources/images/menu/refresh.png" alt="Description" className='btnimg' />
             </Button>

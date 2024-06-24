@@ -31,6 +31,26 @@
   margin-bottom: 1rem;
   overflow-y: auto;
   // padding: 10px 15px;
+  min-height: 160px;
+}
+
+.iconFrame {
+  // margin-right: 8px;
+  display: inline-block;
+  width: 1.62em;
+  height: 1.62em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+  margin-bottom: 1px;
+}
+.iconFrame2 {
+  display: inline-block;
+  width: 1.8em;
+  height: 1.8em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
 }
 
 .Frame.FullScreen {
@@ -79,6 +99,7 @@
 
 .FrameButton {
   color: gray;
+  padding: 6px 5px;
 }
 
 .FrameButton:focus {
@@ -96,8 +117,8 @@
 .ButtonArea {
   // margin: auto 18%;
   position: absolute;
-  top: -60px;
-  right: 5px;
+  top: -62px;
+  right: -8px;
   z-index: 100;
 }
 

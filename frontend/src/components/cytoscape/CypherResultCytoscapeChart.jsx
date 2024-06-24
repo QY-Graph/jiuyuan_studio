@@ -45,6 +45,7 @@ import { generateCytoscapeElement } from '../../features/cypher/CypherUtil';
 import IconFilter from '../../icons/IconFilter';
 import IconSearchCancel from '../../icons/IconSearchCancel';
 import styles from '../frame/Frame.module.scss';
+import './Cypher.scss';
 
 cytoscape.use(COSEBilkent);
 cytoscape.use(cola);
@@ -94,7 +95,6 @@ const CypherResultCytoscapeCharts = ({
           data: cytoscapeObject.elements(':selected')[0].data(),
         });
       }
-
       e.target.removeClass('highlight');
     });
 
@@ -191,7 +191,10 @@ const CypherResultCytoscapeCharts = ({
           },
           {
             content: ReactDOMServer.renderToString(
-              <FontAwesomeIcon icon={faProjectDiagram} size="lg" />,
+              // <FontAwesomeIcon icon={faProjectDiagram} size="lg" />,
+              <svg className="iconCyto" aria-hidden="true">
+                <use href="#icon-relation" />
+              </svg>,
             ),
             select(ele) {
               const elAnimate = ele.animation({
@@ -228,7 +231,10 @@ const CypherResultCytoscapeCharts = ({
           },
           {
             content: ReactDOMServer.renderToString(
-              <FontAwesomeIcon icon={faEyeSlash} size="lg" />,
+              // <FontAwesomeIcon icon={faEyeSlash} size="lg" />,
+              <svg className="iconCyto" aria-hidden="true">
+                <use href="#icon-yincangbukejian" />
+              </svg>,
             ),
             select(ele) {
               ele.remove();
@@ -239,6 +245,7 @@ const CypherResultCytoscapeCharts = ({
               <FontAwesomeIcon icon={faTrash} size="lg" />,
             ),
             select(ele) {
+              console.log('faTrash');
               dispatch(openModal());
               dispatch(addGraphHistory(graph));
               dispatch(addElementHistory(ele.id()));
@@ -257,7 +264,12 @@ const CypherResultCytoscapeCharts = ({
             },
           },
           {
-            content: ReactDOMServer.renderToString(<IconFilter size="lg" />),
+            content: ReactDOMServer.renderToString(
+              // <IconFilter size="lg" />
+              <svg className="iconCyto" aria-hidden="true">
+                <use href="#icon-moxingxuhua" />
+              </svg>,
+            ),
             select(ele) {
               const newFilterObject = {
                 key: uuid(),
@@ -272,7 +284,10 @@ const CypherResultCytoscapeCharts = ({
           },
           {
             content: ReactDOMServer.renderToString(
-              <IconSearchCancel size="lg" />,
+              // <IconSearchCancel size="lg" />,
+              <svg className="iconCyto" aria-hidden="true">
+                <use href="#icon-moxingxuhua1" />
+              </svg>,
             ),
             select(ele) {
               const keywordObject = {

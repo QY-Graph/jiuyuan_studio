@@ -1,13 +1,9 @@
 @font-face {
-  font-family: 'iconfont';  /* 使用的字体名 */
-  src: url('iconfont.eot'); /* IE9 */
-  src: url('iconfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('iconfont.woff2') format('woff2'), /* 超高版本浏览器 */
-       url('iconfont.woff') format('woff'), /* 现代浏览器 */
-       url('iconfont.ttf') format('truetype'), /* Safari, Android, iOS */
-       url('iconfont.svg#iconfont') format('svg'); /* 旧版 iOS */
+  font-family: "iconfont"; /* Project id 4510252 */
+  src: url('iconfont.woff2?t=1719196415161') format('woff2'),
+       url('iconfont.woff?t=1719196415161') format('woff'),
+       url('iconfont.ttf?t=1719196415161') format('truetype');
 }
-
 
 .iconfont {
   font-family: "iconfont" !important;
@@ -15,6 +11,82 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-guanbi1:before {
+  content: "\e605";
+}
+
+.icon-shuaxin4:before {
+  content: "\e62f";
+}
+
+.icon-shuaxin5:before {
+  content: "\e610";
+}
+
+.icon-icon-refresh:before {
+  content: "\e65e";
+}
+
+.icon-shuaxin:before {
+  content: "\e647";
+}
+
+.icon-guanbi:before {
+  content: "\e641";
+}
+
+.icon-shuaxin1:before {
+  content: "\e650";
+}
+
+.icon-shuaxin2:before {
+  content: "\e637";
+}
+
+.icon-shuaxin3:before {
+  content: "\e828";
+}
+
+.icon-shuaxin-:before {
+  content: "\e61b";
+}
+
+.icon-people-network:before {
+  content: "\e865";
+}
+
+.icon-relation:before {
+  content: "\e867";
+}
+
+.icon-classkaisuohuansuo:before {
+  content: "\e7f5";
+}
+
+.icon-moxingxuhua:before {
+  content: "\e62a";
+}
+
+.icon-xuhua:before {
+  content: "\e6ab";
+}
+
+.icon-moxingxuhua1:before {
+  content: "\e62c";
+}
+
+.icon-yincangbukejian:before {
+  content: "\e8d5";
+}
+
+.icon-zuzhiguanxi:before {
+  content: "\e763";
+}
+
+.icon-lajitong:before {
+  content: "\e621";
 }
 
 .icon-zhuye:before {

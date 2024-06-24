@@ -108,7 +108,7 @@ const Frame = ({
           />
         </div>
         <div className={styles.ButtonArea}>
-          {/* {
+          {
             !isTable && onRefresh ? (
               <Button
                 size="large"
@@ -117,13 +117,16 @@ const Frame = ({
                 onClick={() => onRefresh()}
                 title="Refresh"
               >
-                <FontAwesomeIcon
+                {/* <FontAwesomeIcon
                   icon={faSync}
                   size="lg"
-                />
+                /> */}
+                <svg className={`${styles.iconFrame}`} aria-hidden="true">
+                  <use href="#icon-shuaxin3" />
+                </svg>
               </Button>
             ) : null
-          } */}
+          }
           <Button
             size="large"
             type="link"
@@ -139,7 +142,10 @@ const Frame = ({
             // }}
             title="Close Window"
           >
-            <FontAwesomeIcon icon={faTimes} size="lg" />
+            {/* <FontAwesomeIcon icon={faTimes} size="lg" /> */}
+            <svg className={`${styles.iconFrame2}`} aria-hidden="true">
+              <use href="#icon-guanbi" />
+            </svg>
           </Button>
         </div>
       </div>

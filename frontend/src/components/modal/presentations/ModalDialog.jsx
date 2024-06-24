@@ -20,7 +20,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import { Button, Modal } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
+import { Button } from 'antd';
+import { ExclamationCircleOutlined } from '@ant-design/icons';
 
 const ModalDialog = ({
   closeModal,
@@ -61,19 +63,21 @@ const ModalDialog = ({
       >
         <Modal.Dialog>
           <Modal.Header closeButton onClick={() => { dispatch(closeModal()); }}>
-            <Modal.Title>Delete Confirmation</Modal.Title>
+            <Modal.Title>
+              <ExclamationCircleOutlined className='warning-icon' />
+              Delete Confirm
+            </Modal.Title>
           </Modal.Header>
 
           <Modal.Body>
             <p>
-              After clicking on confirm,
               the node and related edge will be deleted from the database.
             </p>
           </Modal.Body>
 
           <Modal.Footer>
-            <Button variant="secondary" onClick={() => { dispatch(closeModal()); }}>Cancel</Button>
-            <Button variant="primary" onClick={() => { removeNode(); }}>Confirm</Button>
+            <Button onClick={() => { dispatch(closeModal()); }}>Cancel</Button>
+            <Button type="danger" onClick={() => { removeNode(); }}>Confirm</Button>
           </Modal.Footer>
         </Modal.Dialog>
       </div>

@@ -46,12 +46,12 @@ const AppHeader = () => {
     console.log(index);
     if (index === 1) {
       confirm({
-        title: '确定要断开连接吗？',
+        title: 'Are you sure you want to disconnect?',
         icon: <ExclamationCircleOutlined />,
-        content: '断开后将需要重新连接才能访问数据库。',
-        okText: '断开',
+        content: 'Once disconnected, you will need to reconnect to access the database.',
+        okText: 'disconnect',
         okType: 'danger',
-        cancelText: '取消',
+        cancelText: 'cancel',
         onOk() {
           dispatch(disconnectToDatabase()).then((response) => {
             if (response.type === 'database/disconnectToDatabase/fulfilled') {

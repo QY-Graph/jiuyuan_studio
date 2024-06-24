@@ -176,7 +176,7 @@ const Editor = ({
                 />
               </button> */}
               <button
-                className="frame-head-button btn btn-link"
+                className="frame-head-button btn btn-link mysearchbtn"
                 type="button"
                 onClick={() => onClick()}
                 title="Run Query"
