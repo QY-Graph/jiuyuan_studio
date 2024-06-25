@@ -18,10 +18,11 @@
  */
 
 import React from 'react';
+import { Button, message } from 'antd';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { Modal } from 'react-bootstrap';
-import { Button } from 'antd';
+// import { Button } from 'antd';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 
 const ModalDialog = ({
@@ -50,9 +51,16 @@ const ModalDialog = ({
           dispatch(removeGraphHistory());
           dispatch(removeElementHistory());
           dispatch(closeModal());
-          alert('The node has been deleted from your database. Please re-run the query.');
+          // alert('The node has been deleted from your database. Please re-run the query.');
+          message.info('The node has been deleted from your database. Please re-run the query.');
           getMetaData({ currentGraph });
+        } else {
+          // 可以处理非成功响应的情况
+          message.error('Failed to delete the node from your database.');
         }
+      }).catch((error) => {
+        // 处理请求失败情况
+        message.error(`An error occurred: ${error.message}`);
       });
   };
 

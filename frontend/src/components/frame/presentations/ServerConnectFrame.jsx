@@ -53,7 +53,7 @@ const ServerConnectFrame = ({
   const connectToDatabase = (data) => dispatch(connectToDatabaseApi(data)).then((response) => {
     console.log(response);
     if (response.type === 'database/connectToDatabase/fulfilled') {
-      message.success('连接成功！');
+      message.success('connect success！');
       dispatch(addAlert('NoticeServerConnected'));
       dispatch(trimFrame('ServerConnect'));
       dispatch(getMetaData({ currentGraph })).then((metadataResponse) => {
@@ -68,7 +68,7 @@ const ServerConnectFrame = ({
       });
       dispatch(addFrame(':server status', 'ServerStatus'));
     } else if (response.type === 'database/connectToDatabase/rejected') {
-      message.error(`连接失败: ${response.error.message}`);
+      message.error(`connect failed: ${response.error.message}`);
       dispatch(addAlert('ErrorServerConnectFail', response.error.message));
     }
   });
