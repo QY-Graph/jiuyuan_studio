@@ -17,16 +17,19 @@
  * under the License.
  */
 
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useRef } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import FramesContainer from '../containers/Frames2';
 import styles from './Contents.module.scss';
+import { resetScrollToTop } from '../../../features/scroll/scrollSlice';
 
 const Contents = ({
   database, isActive, getConnectionStatus, getMetaData, currentGraph,
 }) => {
   const dispatch = useDispatch();
+  const shouldScrollToTop = useSelector((state) => state.scroll.shouldScrollToTop);
+  const scrollRef = useRef();
 
   useEffect(() => {
     console.log('Component Mounted');
@@ -40,7 +43,12 @@ const Contents = ({
         });
       });
     }
-  }, [database.status]);
+
+    if (shouldScrollToTop && scrollRef.current) {
+      scrollRef.current.scrollTop = 0;
+      dispatch(resetScrollToTop());
+    }
+  }, [shouldScrollToTop, database.status]);
 
   return (
     <div className={`${styles.Content} ${isActive ? styles.Expanded : ''}`}>
@@ -49,7 +57,7 @@ const Contents = ({
           <div className={`${styles.searchIcon}`} />
           Search Results
         </div>
-        <div className={`${styles.frameOut}`}>
+        <div className={`${styles.frameOut}`} ref={scrollRef}>
           <FramesContainer />
         </div>
       </div>

@@ -1,6 +1,7 @@
 .form-login .ant-input{
   background-color: #F5F5F7 !important;
-  padding-left: 20px !important;
+  margin-left: 10px !important;
+  padding-left: 10px !important;
   font-weight: bold;
 }
 
@@ -25,5 +26,19 @@
 }
 
 .form-login .ant-input-affix-wrapper-status-error:not(.ant-input-affix-wrapper-disabled):not(.ant-input-affix-wrapper-borderless).ant-input-affix-wrapper:hover{
-  background: #fff;
+  background: #F5F5F7;
+}
+
+.FilledColor .ant-input{
+  background-color: #fff !important;
+}
+
+/* CSS 用于覆盖自动填充的背景色 */
+:-webkit-autofill,
+:-webkit-autofill:hover, 
+:-webkit-autofill:focus, 
+:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+    // -webkit-text-fill-color: #000 !important; /* 设置输入文字颜色，如果需要的话 */
+    // background-color: #1b1bcd !important; /* 设置你希望的背景颜色 */
 }
