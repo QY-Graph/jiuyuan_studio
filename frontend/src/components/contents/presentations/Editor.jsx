@@ -31,6 +31,7 @@ import SideBarToggle from '../../editor/containers/SideBarMenuToggleContainer';
 import { setting } from '../../../conf/config';
 import IconPlay from '../../../icons/IconPlay';
 import { getMetaData } from '../../../features/database/MetadataSlice';
+import { requestScrollToTop } from '../../../features/scroll/scrollSlice';
 import './Editor.scss';
 
 const Editor = ({
@@ -64,6 +65,7 @@ const Editor = ({
   };
 
   const onClick = () => {
+    dispatch(requestScrollToTop());
     const refKey = uuid();
     if (command.toUpperCase().startsWith(':PLAY')) {
       dispatch(() => addFrame(command, 'Contents', refKey));
