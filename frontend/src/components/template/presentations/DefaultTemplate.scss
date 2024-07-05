@@ -38,3 +38,15 @@
 .ant-layout{
   background: transparent;
 }
+
+@media only screen and (min-width: 1441px) and (max-width: 1920px) {
+
+}
+
+@media only screen and (max-width: 1440px) {
+  .group-main-content{
+    // margin-top: 10px;
+    padding: 0 15px;
+    height: calc(100vh - 110px);
+  }
+}

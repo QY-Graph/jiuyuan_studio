@@ -188,3 +188,54 @@
   }
   
 }
+
+
+@media only screen and (min-width: 1441px) and (max-width: 1920px) {
+
+}
+
+@media only screen and (max-width: 1440px) {
+  .FormTitle{
+    margin-bottom: 30px;
+  }
+  
+  .FormTitle1{
+    color: #2e3367;
+    font-size: 28px;
+  }
+  
+  .FormTitle2{
+    font-size: 14px;
+  }
+
+  .FormItemOut {
+    .InputOner {
+      height: 44px;
+      font-size: 16px;
+    }
+  }
+
+  .InputLabel {
+    left: 66px;
+    top: 9px;
+    font-size: 16px;
+  }
+
+  .InputLabel.focused {
+    transform: translateY(-24px);
+    padding: 0 8px;
+  }
+
+  .SubmitBtn{
+    margin-top: 20px;
+    height: 54px;
+    width: 150px;
+    border-radius: 9px;
+    font-size: 18px;
+  }
+
+  .LogoImage{
+    width: 66px;
+    height: 66px;
+  }
+}

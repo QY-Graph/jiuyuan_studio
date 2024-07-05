@@ -292,5 +292,78 @@
 }
 
 @media only screen and (max-width: 1440px) {
+  .edit-header{
+    background-color: #fff;
+    height: 90px;
+  }
+
+  .headerOuter{
+    position: relative;
+    padding: 20px 10% 0;
+    background-color: #fff;
+  }
+
+  .title{
+    font-size: 28px;
+  }
+
+  .InputOner {
+    background: #FDFDFF;
+    border: none; // 移除输入框自带的边框
+    height: 42px;
+    font-size: 16px;
+    border: 1.5px solid #80BEFC;
+    border-radius: 10px;
+  }
+
+  .graphTitle{
+    font-size: 18px;
+   margin-bottom: 10px;
+  }
+
+  #headerRow{
+    padding: 0 0 20px 0;
+  }
+
+  #graphInputRow2{
+    height: 40px;
+    // padding: 5px 0 5px 10px;
+  }
+
+  .BtnOuter{
+    height: 40px;
+    margin: 6px 0 6px 0;
+    padding: 0 10px;
+  }
+
+  .listOut{
+    height: calc(100% - 70px);
+    // padding: 10px 20px 10px 10px;
+    // margin: 10px 10px 0 0;
+  }
+
+  .uploadBtn{
+    font-size: 13px;
+    padding: 5px 20px;
+  }
+  
+  #clearButton{
+    margin: 0 20px 0 60px;
+    height: 44px;
+    width: 68px;
+    font-size: 16px;
+  }
+
+  #doneButton{
+    height: 44px;
+    width: 100px;
+    font-size: 16px;
+  }
+
+  .rightPng{
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+  }
 
 }

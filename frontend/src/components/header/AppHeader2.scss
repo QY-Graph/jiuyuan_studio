@@ -104,4 +104,46 @@
   font-size: 16px;
   line-height: 36px;
   font-weight: 500;
+  color: #2B3476;
+}
+
+@media only screen and (min-width: 1441px) and (max-width: 1920px) {
+
+}
+
+@media only screen and (max-width: 1440px) {
+  .header2 .logo-img2{
+    width: 125px;
+    height: 64px;
+    margin-bottom: 10px;
+  }
+
+  .header2 .imgout2{
+    height: 30px;
+    width: 30px;
+  }
+  
+  .header2 .Circle22{
+    height: 2em;
+    width: 2em;
+  }
+
+  .header2 .Circle222{
+    height: 1em;
+    width: 1em;
+  }
+  
+  .header2 .Circle32{
+    height: 0.8em;
+    width: 0.8em;
+  }
+  
+  .header2 .title12{
+    font-size: 14px;
+    line-height: 32px;
+  }
+  
+  .header2 .title22{
+    font-size: 14px;
+  }
 }

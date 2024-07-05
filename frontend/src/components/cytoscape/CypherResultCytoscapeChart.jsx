@@ -41,6 +41,7 @@ import uuid from 'react-uuid';
 import cxtmenu from '../../lib/cytoscape-cxtmenu';
 import { initLocation, seletableLayouts } from './CytoscapeLayouts';
 import { stylesheet } from './CytoscapeStyleSheet';
+import { stylesheets } from './CytoscapeStyleSheet1440';
 import { generateCytoscapeElement } from '../../features/cypher/CypherUtil';
 import IconFilter from '../../icons/IconFilter';
 import IconSearchCancel from '../../icons/IconSearchCancel';
@@ -73,6 +74,7 @@ const CypherResultCytoscapeCharts = ({
 }) => {
   const [cytoscapeMenu, setCytoscapeMenu] = useState(null);
   const [initialized, setInitialized] = useState(false);
+  const [cyConfig, setCyConfig] = useState(stylesheet);
   const dispatch = useDispatch();
   const addEventOnElements = (targetElements) => {
     targetElements.bind('mouseover', (e) => {
@@ -345,6 +347,22 @@ const CypherResultCytoscapeCharts = ({
     }
   }, [cytoscapeObject, cytoscapeLayout]);
 
+  useEffect(() => {
+    function handleResize() {
+      console.log('handleResize');
+      if (window.innerWidth > 1440) {
+        setCyConfig(stylesheet);
+      } else {
+        setCyConfig(stylesheets);
+      }
+    }
+
+    window.addEventListener('resize', handleResize);
+    handleResize(); // 初始检查
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const cyCallback = useCallback(
     (newCytoscapeObject) => {
       if (cytoscapeObject) return;
@@ -356,7 +374,8 @@ const CypherResultCytoscapeCharts = ({
   return (
     <CytoscapeComponent
       elements={CytoscapeComponent.normalizeElements(elements)}
-      stylesheet={stylesheet}
+      // stylesheet={stylesheets}
+      stylesheet={cyConfig}
       cy={cyCallback}
       className={styles.NormalChart}
       wheelSensitivity={0.3}

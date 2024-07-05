@@ -91,3 +91,40 @@
   overflow: hidden;
   margin-bottom: 1px;
 }
+
+@media only screen and (min-width: 1441px) and (max-width: 1920px) {
+
+}
+
+@media only screen and (max-width: 1440px) {
+  .legend-button-area .ant-tabs-tab + .ant-tabs-tab{
+    margin: 0 0 0 24px;
+  }
+  .legend-button-area .ant-tabs-tab{
+    padding: 4px 0 8px 0;
+  }
+
+  .mylegend .nodeLegend, .mylegend .edgeLegend{
+    min-height: 30px;
+    line-height: 29px;
+  }
+  .mylegend .nodeLegend .legend,
+  .mylegend .edgeLegend .legend{
+    height: 30px;
+  }
+
+  .legendText{
+    font-size: 14px;
+  }
+
+  .openBtn{
+    height: 28px;
+    line-height: 15px;
+  }
+
+  .mylegend .nodeLabel,
+  .mylegend .edgeLabel{
+    font-size: 13px;
+  }
+
+}

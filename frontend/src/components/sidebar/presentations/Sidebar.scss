@@ -154,6 +154,52 @@
 }
 
 @media only screen and (max-width: 1440px) {
+  .graphName{
+    height: 40px;
+    line-height: 30px;
+    font-size: 24px;
+  }
 
+  .sidebar .ant-collapse > .ant-collapse-item > .ant-collapse-header{
+   padding: 6px 12px;
+  }
+
+  .mysidebar .node-item{
+    margin: 0 10px 0 0;
+    border-radius: 0;
+    height: 35px;
+    line-height: 30px;
+    font-size: 14px;
+  }
+
+  .mysidebar .csvfile{
+    height: 24px;
+    width: 24px;
+    margin-right: 8px;
+  }
+  .sidebar  .ant-collapse-borderless > .ant-collapse-item > .ant-collapse-content{
+    height: calc(28vh);
+  }
+
+  .graphPick .ant-btn{
+    padding: 4px;
+    height: 26px;
+    width: 26px;
+    line-height: 13px;
+  }
+
+  .graphPick .btnimg{
+    height: 12px;
+    width: 12px;
+  }
+  
+  .graphPick .btnimg2{
+    height: 8px;
+    width: 12px;
+  }
+
+  .graphPick{
+    height: 42px;
+  }
 
 }
