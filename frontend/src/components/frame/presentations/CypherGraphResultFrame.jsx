@@ -116,6 +116,7 @@ const CypherResultFrame = ({
   }, [globalThickness]);
 
   const refreshFrame = () => {
+    console.log('refreshFrame');
     setCytoscapeContainerKey(uuid());
   };
 
@@ -151,6 +152,7 @@ const CypherResultFrame = ({
   };
 
   const downloadCsv = () => {
+    console.log('refresh==================');
     const eleJson = chartAreaRef.current.getCy().elements().jsons();
     if (eleJson.length === 0) {
       alert('No data to download!');

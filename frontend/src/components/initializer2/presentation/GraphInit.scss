@@ -188,6 +188,7 @@
   width: 40%;
   padding-left: 10px;
   font-weight: 500;
+  // font-size: 14px;
 }
 
 .listItem{
@@ -235,6 +236,10 @@
 #clearButton:hover{
     opacity: 10;
 }
+#clearButton:focus{
+  box-shadow: 0 0 0 .2rem rgb(38 255 60 / 50%);;
+}
+
 
 .edit-header{
   background-color: #fff;
@@ -277,4 +282,15 @@
   border: 2px solid #0b0000;
   border-top: 0;
   border-left: 0;
+}
+
+@media only screen and (min-width: 1441px) and (max-width: 1920px) {
+  .edit-header{
+    background-color: #fff;
+    height: 100px;
+  }
+}
+
+@media only screen and (max-width: 1440px) {
+
 }

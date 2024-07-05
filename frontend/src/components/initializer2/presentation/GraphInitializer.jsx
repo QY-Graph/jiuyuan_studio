@@ -40,13 +40,17 @@ const InitGraphModal = () => {
     setDropGraph(false);
     setLoading(false);
     setError('');
+    message.success('clean done, please reupload!');
   };
   const handleSelectNodeFiles = (e) => {
     Array.from(e.target.files).forEach((file) => {
       const key = uuid();
+      // 匹配文件名中最后一个点之后的所有字符
+      const fileNameWithoutExtension = file.name.replace(/\.[^/.]+$/, ''); // 去除文件扩展名
       nodeFiles[key] = {
         data: file,
-        name: '',
+        // name: '',
+        name: fileNameWithoutExtension,
       };
     });
     setNodeFiles({ ...nodeFiles });
@@ -56,9 +60,11 @@ const InitGraphModal = () => {
   const handleSelectEdgeFiles = (e) => {
     Array.from(e.target.files).forEach((file) => {
       const key = uuid();
+      const fileNameWithoutExtension = file.name.replace(/\.[^/.]+$/, ''); // 去除文件扩展名
       edgeFiles[key] = {
         data: file,
-        name: '',
+        // name: '',
+        name: fileNameWithoutExtension,
       };
     });
     setEdgeFiles({ ...edgeFiles });
@@ -120,9 +126,10 @@ const InitGraphModal = () => {
       })
       .catch((err) => {
         console.log('error', err);
-        message.error('Upload failed, please check the parameters and try again.');
+        message.error(`Upload failed: ${err}`);
+        // message.error('Upload failed, please check the parameters and try again.');
         setLoading(false);
-        setError(err);
+        // setError(err);
       });
   };
 

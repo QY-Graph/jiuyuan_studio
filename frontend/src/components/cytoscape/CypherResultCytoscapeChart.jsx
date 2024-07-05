@@ -95,7 +95,10 @@ const CypherResultCytoscapeCharts = ({
           data: cytoscapeObject.elements(':selected')[0].data(),
         });
       }
-      e.target.removeClass('highlight');
+      // e.target.removeClass('highlight');
+      if (!e.target.hasClass('right-clicked')) {
+        e.target.removeClass('highlight');
+      }
     });
 
     targetElements.bind('click', (e) => {
@@ -115,11 +118,21 @@ const CypherResultCytoscapeCharts = ({
       } else {
         cytoscapeObject.elements(':selected').unselect().selectify();
       }
+      if (ele.hasClass('right-clicked')) {
+        ele.removeClass('right-clicked'); // 如果已经被右键选中，再次点击取消
+      }
+    });
+
+    targetElements.bind('cxttap', (e) => {
+      const ele = e.target;
+      ele.addClass('highlight'); // 保持高亮
+      ele.addClass('right-clicked'); // 添加一个表示右键点击的类
     });
 
     cytoscapeObject.bind('click', (e) => {
       if (e.target === cytoscapeObject) {
         cytoscapeObject.elements(':selected').unselect().selectify();
+        cytoscapeObject.elements().removeClass('highlight').removeClass('right-clicked');
         onElementsMouseover({
           type: 'background',
           data: {
