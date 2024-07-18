@@ -30,11 +30,11 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { Button, Popover, Modal } from 'antd';
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import styles from './Frame.module.scss';
 import { removeFrame } from '../../features/frame/FrameSlice';
 import { setCommand } from '../../features/editor/EditorSlice';
-import { removeActiveRequests } from '../../features/cypher/CypherSlice';
+import { removeActiveRequests, cancelCypherQuery } from '../../features/cypher/CypherSlice';
 import EdgeWeight from '../../icons/EdgeWeight';
 import IconFilter from '../../icons/IconFilter';
 import IconSearchCancel from '../../icons/IconSearchCancel';
@@ -69,11 +69,31 @@ const Frame = ({
   //     </Menu.Item>
   //   </Menu>
   // );
+  const queryComplete = useSelector((state) => state.cypher.queryResult[refKey]);
+  const renderStatus = useSelector((state) => state.cypher.renderStatus);
+
+  const handleStop = () => {
+    Modal.confirm({
+      title: 'Are you sure you want to stop request?',
+      onOk() {
+        console.log('option1');
+        dispatch(cancelCypherQuery(refKey));
+        dispatch(removeActiveRequests(refKey));
+      },
+      onCancel() {
+        // 可以在这里处理取消的逻辑，如果没有需要则留空
+      },
+      okText: 'Yes',
+      cancelText: 'No',
+      className: styles.customModalClass, // 如果需要自定义模态框的样式
+    });
+  };
 
   const handleRemove = () => {
     Modal.confirm({
       title: 'Are you sure you want to close this window?',
       onOk() {
+        console.log('option2');
         dispatch(removeFrame(refKey));
         dispatch(removeActiveRequests(refKey));
       },
@@ -107,7 +127,30 @@ const Frame = ({
             }}
           />
         </div>
+        <div className={styles.RenderArea}>
+          {
+            renderStatus !== 0 ? (
+              'Rendering...'
+            ) : null
+          }
+        </div>
         <div className={styles.ButtonArea}>
+          {
+            !queryComplete?.complete ? (
+              <Button
+                size="large"
+                type="link"
+                className={`${styles.FrameButton}`}
+                onClick={handleStop}
+                title="Close Window"
+              >
+                <svg className={`${styles.iconFrame2}`} aria-hidden="true">
+                  <use href="#icon-cancel-test-copy" />
+                </svg>
+               
+              </Button>
+            ) : null
+          }
           {
             !isTable && onRefresh ? (
               <Button
@@ -127,26 +170,23 @@ const Frame = ({
               </Button>
             ) : null
           }
-          <Button
-            size="large"
-            type="link"
-            className={`${styles.FrameButton}`}
-            onClick={handleRemove}
-            //   () => {
-            //   if (window.confirm('Are you sure you want to close this window?')) {
-            //     dispatch(removeFrame(refKey));
-            //     dispatch(removeActiveRequests(refKey));
-            //   } else {
-            //     // Do nothing!
-            //   }
-            // }}
-            title="Close Window"
-          >
-            {/* <FontAwesomeIcon icon={faTimes} size="lg" /> */}
-            <svg className={`${styles.iconFrame2}`} aria-hidden="true">
-              <use href="#icon-guanbi" />
-            </svg>
-          </Button>
+          {
+            queryComplete?.complete ? (
+              <Button
+                size="large"
+                type="link"
+                className={`${styles.FrameButton}`}
+                onClick={handleRemove}
+                title="Close Window"
+              >
+                {/* <FontAwesomeIcon icon={faTimes} size="lg" /> */}
+                <svg className={`${styles.iconFrame2}`} aria-hidden="true">
+                  <use href="#icon-guanbi" />
+                </svg>
+              </Button>
+            ) : null
+          }
+
         </div>
       </div>
       <div

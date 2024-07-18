@@ -18,10 +18,11 @@
  */
 
 import React, {
-  forwardRef, useEffect, useImperativeHandle, useState,
+  forwardRef, useEffect, useImperativeHandle, useState, useRef,
 } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
+import { setRenderStatus } from '../../../features/cypher/CypherSlice';
 import {
   edgeLabelColors, edgeLabelSizes, nodeLabelColors, nodeLabelSizes,
 } from '../../../features/cypher/CypherUtil';
@@ -31,6 +32,8 @@ import CypherResultCytoscapeFooter from '../../cytoscape/CypherResultCytoscapeFo
 import CypherResultTab from '../../cytoscape/CypherResultTab';
 
 const CypherResultCytoscape = forwardRef((props, ref) => {
+  const { data, setChartLegend, renderStatus } = props;
+  // const [renderStatus] = useState(props.renderStatus);
   const [footerData, setFooterData] = useState({});
   const [legendData, setLegendData] = useState({ edgeLegend: {}, nodeLegend: {} });
   const [elements, setElements] = useState({ edges: [], nodes: [] });
@@ -43,27 +46,104 @@ const CypherResultCytoscape = forwardRef((props, ref) => {
   const [cytoscapeObject, setCytoscapeObject] = useState(null);
   const [cytoscapeLayout, setCytoscapeLayout] = useState('coseBilkent');
 
+  const elementsQueue = useRef([]);
+  const isProcessing = useRef(false);
+  const chunkArray = (array, size) => {
+    console.log(array);
+    const result = [];
+    for (let i = 0; i < array.length; i += size) {
+      result.push(array.slice(i, i + size));
+    }
+    console.log(result);
+    return result;
+  };
+
+  const processQueue = () => {
+    console.log('processQueueprocessQueueprocessQueueprocessQueue');
+    // console.log(isProcessing.current);
+    // console.log(elementsQueue.current.length);
+    if (!isProcessing.current && elementsQueue.current.length > 0) {
+      isProcessing.current = true;
+
+      const renderNextChunk = () => {
+        if (elementsQueue.current.length > 0) {
+          const nextChunk = elementsQueue.current.shift();
+          const newNodes = nextChunk.filter((element) => element.group === 'nodes');
+          const newEdges = nextChunk.filter((element) => element.group === 'edges');
+
+          console.log(newNodes);
+          console.log(newEdges);
+          setElements((prevData) => ({
+            nodes: [...prevData.nodes, ...newNodes],
+            edges: [...prevData.edges, ...newEdges],
+          }));
+
+          requestAnimationFrame(renderNextChunk);
+        } else {
+          console.log('ggggggggggggggggggggggggggggggg');
+          isProcessing.current = false;
+          dispatch(setRenderStatus(2));
+          console.log(cytoscapeLayout);
+          
+          // if (cytoscapeLayout === 'coseBilkent') {
+          //   setCytoscapeLayout('coseBilkent');
+          // } else {
+          // setCytoscapeLayout(cytoscapeLayout);
+          // } 
+        }
+      };
+      requestAnimationFrame(renderNextChunk);
+    }
+  };
+
   useEffect(() => {
-    if (props.data.legend !== undefined && Object.keys(props.data.legend.nodeLegend).length > 0) {
+    console.log('setIsTable type in CypherResultCytoscape:', typeof props.setIsTable); // 应该输出 'function'
+    console.log('--------------elements----------------');
+    console.log(cytoscapeLayout);
+    console.log(cytoscapeObject);
+    setCytoscapeLayout(cytoscapeLayout);
+    console.log(data);
+    if (data.legend !== undefined && Object.keys(data.legend.nodeLegend).length > 0) {
       if (Object.keys(legendData.edgeLegend).length === 0
           && Object.keys(legendData.nodeLegend).length === 0) {
         setIsReloading(false);
       }
-
-      setLegendData(props.data.legend);
-      setElements(props.data.elements);
+      setLegendData(data.legend);
+      console.log(data.elements);
+      // setElements(data.elements);
+      // setTimeout(() => {
+      // setCytoscapeLayout('');
+      // }, 100);
+      elementsQueue.current = chunkArray(
+        data.elements.nodes.concat(data.elements.edges), 1000,
+      );
+      console.log(elementsQueue.current);
+      if (elementsQueue.current.length > 0) {
+        processQueue();
+      }
+      // processQueue();
+      // console.log(cytoscapeObject);
+      // console.log(cytoscapeLayout);
     }
   }, [
     setIsReloading,
-    elements.edges.length,
-    elements.nodes.length,
+    // elements.edges.length,
+    // elements.nodes.length,
     legendData.edgeLegend,
     legendData.nodeLegend,
-    props.data,
+    data,
+    cytoscapeLayout,
   ]);
 
+  // 监听 initialLoadComplete 状态，触发 layout
+  // useEffect(() => {
+  //   if (initialLoadComplete) {
+  //     setCytoscapeLayout('coseBilkent');
+  //   }
+  // }, [initialLoadComplete]);
+
   useEffect(() => {
-    props.setChartLegend(props.data.legend);
+    props.setChartLegend(data.legend);
   }, []);
 
   const getCaptionsFromCytoscapeObject = (elementType, label) => {
@@ -76,6 +156,7 @@ const CypherResultCytoscape = forwardRef((props, ref) => {
   };
 
   const getFooterData = (event) => {
+    // console.log('--------------getFooterData----------------');
     if (event.type === 'labels') {
       setCaptions(['gid', 'label'].concat(Array.from(getCaptionsFromCytoscapeObject(event.data.type, event.data.label))));
 
@@ -356,10 +437,10 @@ const CypherResultCytoscape = forwardRef((props, ref) => {
       return cytoscapeObject;
     },
     getLabels() {
-      return Object.keys(props.data.legend.nodeLegend);
+      return Object.keys(data.legend.nodeLegend);
     },
     getEdges() {
-      return Object.keys(props.data.legend.edgeLegend);
+      return Object.keys(data.legend.edgeLegend);
     },
     getCaptionsFromCytoscapeObject,
     applyFilterOnCytoscapeElements,
@@ -369,6 +450,7 @@ const CypherResultCytoscape = forwardRef((props, ref) => {
 
   return (
     <div className="chart-frame-area">
+
       <div>
         <CypherResultTab refKey={props.refKey} setIsTable={props.setIsTable} currentTab="graph" />
       </div>
@@ -394,6 +476,7 @@ const CypherResultCytoscape = forwardRef((props, ref) => {
         openModal={props.openModal}
         addGraphHistory={props.addGraphHistory}
         addElementHistory={props.addElementHistory}
+        // chartId="unique-chart-id-1" // 确保每个组件实例有唯一的 ID
       />
       <CypherResultCytoscapeFooter
         captions={captions}

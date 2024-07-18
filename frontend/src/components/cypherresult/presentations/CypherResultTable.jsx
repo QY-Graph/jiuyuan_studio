@@ -114,7 +114,12 @@ const CypherResultTable = ({ data, ...props }) => {
           <div className="d-flex edgeLegend">Edge:</div>
         </div> */}
       </div>
-      <Table columns={localColumns} dataSource={localRows} />
+      <Table 
+        columns={localColumns} 
+        dataSource={localRows} 
+        style={{ width: '100%', padding: '0 20px' }} 
+        scroll={{ x: '100%' }} 
+      />
     </div>
   );
 };

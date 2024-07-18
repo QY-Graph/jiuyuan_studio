@@ -16,7 +16,10 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { 
+  useCallback, useEffect, useState, useRef,
+} from 'react';
+import { Spin } from 'antd';
 import ReactDOMServer from 'react-dom/server';
 import PropTypes from 'prop-types';
 import cytoscape from 'cytoscape';
@@ -27,7 +30,7 @@ import klay from 'cytoscape-klay';
 import euler from 'cytoscape-euler';
 import avsdf from 'cytoscape-avsdf';
 import spread from 'cytoscape-spread';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import CytoscapeComponent from 'react-cytoscapejs';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -37,11 +40,13 @@ import {
   faTrash,
   faThumbtack,
 } from '@fortawesome/free-solid-svg-icons';
+import { StopOutlined } from '@ant-design/icons';
 import uuid from 'react-uuid';
 import cxtmenu from '../../lib/cytoscape-cxtmenu';
 import { initLocation, seletableLayouts } from './CytoscapeLayouts';
 import { stylesheet } from './CytoscapeStyleSheet';
 import { stylesheets } from './CytoscapeStyleSheet1440';
+import { setRenderStatus } from '../../features/cypher/CypherSlice';
 import { generateCytoscapeElement } from '../../features/cypher/CypherUtil';
 import IconFilter from '../../icons/IconFilter';
 import IconSearchCancel from '../../icons/IconSearchCancel';
@@ -71,11 +76,21 @@ const CypherResultCytoscapeCharts = ({
   openModal,
   addGraphHistory,
   addElementHistory,
+  // chartId,
 }) => {
+  const renderStatus = useSelector((state) => state.cypher.renderStatus);
+  const renderStatusRef = useRef(renderStatus);
   const [cytoscapeMenu, setCytoscapeMenu] = useState(null);
   const [initialized, setInitialized] = useState(false);
   const [cyConfig, setCyConfig] = useState(stylesheet);
   const dispatch = useDispatch();
+
+  // 同步更新 renderStatusRef 的值
+  useEffect(() => {
+    renderStatusRef.current = renderStatus;
+    console.log(renderStatusRef.current);
+  }, [renderStatus]);
+
   const addEventOnElements = (targetElements) => {
     targetElements.bind('mouseover', (e) => {
       onElementsMouseover({ type: 'elements', data: e.target.data() });
@@ -147,6 +162,7 @@ const CypherResultCytoscapeCharts = ({
   };
 
   const addElements = (centerId, d) => {
+    console.log('===================addElements====================');
     const generatedData = generateCytoscapeElement(
       d.rows,
       maxDataOfGraph,
@@ -189,6 +205,7 @@ const CypherResultCytoscapeCharts = ({
   };
 
   useEffect(() => {
+    console.log('---------------charts-------------------');
     if (cytoscapeMenu === null && cytoscapeObject !== null) {
       const cxtMenuConf = {
         menuRadius(ele) {
@@ -331,7 +348,13 @@ const CypherResultCytoscapeCharts = ({
   }, [cytoscapeObject, cytoscapeMenu]);
 
   useEffect(() => {
-    if (cytoscapeLayout && cytoscapeObject) {
+    console.log(renderStatus);
+    // renderStatusRef.current = renderStatus;
+    console.log(cytoscapeLayout);
+    console.log(cytoscapeObject);
+    if ((cytoscapeLayout && cytoscapeObject) || renderStatus !== 0) {
+      console.log('---------------cytoscapeLayout-------------------');
+      console.log(cytoscapeLayout);
       const selectedLayout = seletableLayouts[cytoscapeLayout];
       selectedLayout.animate = true;
       selectedLayout.fit = true;
@@ -345,7 +368,11 @@ const CypherResultCytoscapeCharts = ({
         setInitialized(true);
       }
     }
-  }, [cytoscapeObject, cytoscapeLayout]);
+    if (renderStatus === 2) {
+      console.log('布局全部渲染完成');
+      dispatch(setRenderStatus(0)); // 设置渲染状态为完成
+    }
+  }, [cytoscapeObject, cytoscapeLayout, renderStatus]);
 
   useEffect(() => {
     function handleResize() {
@@ -365,21 +392,30 @@ const CypherResultCytoscapeCharts = ({
 
   const cyCallback = useCallback(
     (newCytoscapeObject) => {
+      // console.log(renderStatus);
+      // console.log(renderStatusRef.current);
+      // if (renderStatusRef.current === 2) {
+      //   console.log('布局全部渲染完成');
+      //   dispatch(setRenderStatus(0)); // 设置渲染状态为完成
+      // }
       if (cytoscapeObject) return;
       setCytoscapeObject(newCytoscapeObject);
     },
-    [cytoscapeObject],
+    [cytoscapeObject, renderStatus],
   );
 
   return (
-    <CytoscapeComponent
-      elements={CytoscapeComponent.normalizeElements(elements)}
-      // stylesheet={stylesheets}
-      stylesheet={cyConfig}
-      cy={cyCallback}
-      className={styles.NormalChart}
-      wheelSensitivity={0.3}
-    />
+    <Spin spinning={renderStatus !== 0} tip="Loading..." wrapperClassName="custom-spin-overlay">
+      <CytoscapeComponent
+        elements={CytoscapeComponent.normalizeElements(elements)}
+        // stylesheet={stylesheets}
+        stylesheet={cyConfig}
+        cy={cyCallback}
+        className={styles.NormalChart}
+        wheelSensitivity={0.3}
+      />
+    </Spin>
+    
   );
 };
 

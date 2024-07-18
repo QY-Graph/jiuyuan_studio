@@ -137,6 +137,7 @@ const CypherResultCytoscapeFooter = ({
             edges
           </div>
           <span className='layoutText'>Layout &nbsp;</span>
+          {/* {`${cytoscapeLayout}`} */}
           <select
             id="selectLayout"
             className="col-2 custom-select custom-select-sm layout-select"

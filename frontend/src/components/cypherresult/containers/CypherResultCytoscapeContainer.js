@@ -17,37 +17,25 @@
  * under the License.
  */
 
-import { connect } from 'react-redux';
+import React, { useEffect, useState, useRef } from 'react';
+import { connect, useSelector, useDispatch } from 'react-redux';
+import { 
+  useWorker, 
+  WORKER_STATUS,
+} from '@koale/useworker';
+import { SoundTwoTone } from '@ant-design/icons';
 import CypherResultCytoscape from '../presentations/CypherResultCytoscape';
-import { setLabels } from '../../../features/cypher/CypherSlice';
+import { setLabels, setRenderStatus } from '../../../features/cypher/CypherSlice';
 import { openModal, addGraphHistory, addElementHistory } from '../../../features/modal/ModalSlice';
-import { generateCytoscapeElement } from '../../../features/cypher/CypherUtil';
+// import { generateCytoscapeElement } from '../../../features/cypher/CypherUtil';
+import { generateCytoscapeElement } from './generateElementsWorker';
 
 const mapStateToProps = (state, ownProps) => {
   const { refKey } = ownProps;
 
-  const generateElements = () => {
-    try {
-      return generateCytoscapeElement(
-        state.cypher.queryResult[refKey].rows, state.setting.maxDataOfGraph, false,
-      );
-    } catch (e) {
-      // TODO need tracing error
-      console.error(e);
-    }
-    return {
-      legend: {
-        nodeLegend: {},
-        edgeLegend: {},
-      },
-      elements: {
-        nodes: [],
-        edges: [],
-      },
-    };
-  };
   return {
-    data: generateElements(),
+    renderStatus: state.cypher.renderStatus,
+    queryResult: state.cypher.queryResult[refKey],
     maxDataOfGraph: state.setting.maxDataOfGraph,
     maxDataOfTable: state.setting.maxDataOfTable,
     setChartLegend: ownProps.setChartLegend,
@@ -61,10 +49,74 @@ const mapDispatchToProps = {
   addGraphHistory,
   addElementHistory,
 };
+const CypherResult = (props) => {
+  const dispatch = useDispatch();
+  const renderStatus = useSelector((state) => state.cypher.renderStatus);
+  const { 
+    queryResult, maxDataOfGraph, maxDataOfTable, setChartLegend, graph, setIsTable, refKey,
+  } = props;
+
+  const [data, setData] = useState({
+    legend: {
+      nodeLegend: {},
+      edgeLegend: {},
+    },
+    elements: {
+      nodes: [],
+      edges: [],
+    },
+  });
+  // const latestQueryResult = useRef(queryResult);
+  // useEffect(() => {
+  //   latestQueryResult.current = queryResult;
+  // }, [queryResult]);
+  // const [generateCytoscapeElement] = useWorker(() => 
+  // import('./generateElementsWorker').then((module) => module.generateCytoscapeElement));
+  const [runworker] = useWorker(generateCytoscapeElement);
+
+  useEffect(() => {
+    if (queryResult.complete) {
+      const delay = 100; // 延时 0.1 秒执行
+      dispatch(setRenderStatus(1));
+      const timeoutId = setTimeout(async () => {
+        console.log('==============init data=============');
+        // console.log(renderStatus);
+        try {
+          const elements = await runworker(
+            // latestQueryResult.current.rows,
+            queryResult.rows,
+            maxDataOfGraph,
+            false,
+          );
+          setData(elements);
+        } catch (error) {
+          console.error('Worker error:', error);
+        }
+      }, delay);
+
+      // Cleanup function to clear the timeout if the component unmounts
+      return () => clearTimeout(timeoutId);
+    } 
+    return () => {};
+  }, [queryResult, maxDataOfGraph]);
+
+  return (
+    <CypherResultCytoscape
+      data={data}
+      maxDataOfGraph={maxDataOfGraph}
+      maxDataOfTable={maxDataOfTable}
+      setChartLegend={setChartLegend}
+      graph={graph}
+      renderStatus={renderStatus}
+      setIsTable={setIsTable}
+      refKey={refKey}
+    />
+  );
+};
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
   null,
   { forwardRef: true },
-)(CypherResultCytoscape);
+)(CypherResult);

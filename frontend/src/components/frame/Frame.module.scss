@@ -173,6 +173,15 @@
 #toEditor:hover{
   color:rgb(20, 33, 55)
 }
+
+.RenderArea{
+  position: absolute;
+  top: -52px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+}
+
 /* ---------------------------------------------------
     MEDIAQUERIES
 ----------------------------------------------------- */

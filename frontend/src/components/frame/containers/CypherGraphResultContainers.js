@@ -20,11 +20,12 @@
 import { connect } from 'react-redux';
 import { pinFrame, removeFrame } from '../../../features/frame/FrameSlice';
 import CypherGraphResultFrame from '../presentations/CypherGraphResultFrame';
+import { cancelCypherQuery } from '../../../features/cypher/CypherSlice';
 
 const mapStateToProps = (state, props) => ({
   queryComplete: state.cypher.queryResult[props.refKey],
 });
 
-const mapDispatchToProps = { removeFrame, pinFrame };
+const mapDispatchToProps = { removeFrame, pinFrame, cancelCypherQuery };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CypherGraphResultFrame);

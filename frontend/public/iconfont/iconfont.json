@@ -6,6 +6,55 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "6337458",
+      "name": "取消链接",
+      "font_class": "quxiaolianjie",
+      "unicode": "ec80",
+      "unicode_decimal": 60544
+    },
+    {
+      "icon_id": "8875616",
+      "name": "取消",
+      "font_class": "quxiao",
+      "unicode": "e633",
+      "unicode_decimal": 58931
+    },
+    {
+      "icon_id": "14433100",
+      "name": "取消",
+      "font_class": "quxiao1",
+      "unicode": "e80a",
+      "unicode_decimal": 59402
+    },
+    {
+      "icon_id": "15835877",
+      "name": "取消",
+      "font_class": "quxiao2",
+      "unicode": "e606",
+      "unicode_decimal": 58886
+    },
+    {
+      "icon_id": "17675040",
+      "name": "取消分闸",
+      "font_class": "quxiaofenzha",
+      "unicode": "e631",
+      "unicode_decimal": 58929
+    },
+    {
+      "icon_id": "29495914",
+      "name": "cancel-test",
+      "font_class": "cancel-test-copy",
+      "unicode": "e607",
+      "unicode_decimal": 58887
+    },
+    {
+      "icon_id": "40583728",
+      "name": "取消-copy",
+      "font_class": "cancel",
+      "unicode": "e608",
+      "unicode_decimal": 58888
+    },
+    {
       "icon_id": "4331427",
       "name": "关闭",
       "font_class": "guanbi1",

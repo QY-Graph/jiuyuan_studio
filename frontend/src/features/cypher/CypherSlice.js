@@ -19,6 +19,7 @@
 
 /* eslint-disable no-param-reassign */
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { useDispatch } from 'react-redux';
 
 // eslint-disable-next-line no-unused-vars
 const validateSamePathVariableReturn = (cypherQuery) => {
@@ -61,13 +62,17 @@ export const executeCypherQuery = createAsyncThunk(
           body: JSON.stringify({ cmd: args[1] }),
           signal: thunkAPI.signal,
         });
+      // await new Promise((resolve) => setTimeout(resolve, 200000));
       if (response.ok) {
         const res = await response.json();
+        // console.log(res);
         return { key: args[0], query: args[1], ...res };
       }
       throw response;
     } catch (error) {
-      if (error.json === undefined) {
+      if (thunkAPI.signal.aborted) {
+        throw new Error('Fetch aborted by the user');
+      } else if (error.json === undefined) {
         throw error;
       } else {
         const errorJson = await error.json();
@@ -77,6 +82,35 @@ export const executeCypherQuery = createAsyncThunk(
     }
   },
 
+);
+
+export const cancelCypherQuery = createAsyncThunk(
+  '/cypher/cancel',
+  async (queryKey, { getState }) => {
+    try {
+      // 发送取消请求到后端
+      const response = await fetch('/api/v1/cypher/cancel', {
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        method: 'GET',
+      });
+
+      if (response.ok) {
+        // 取消成功，获取对应的AbortController实例并调用abort
+        const controller = getState().cypher.activeRequests[queryKey]?.controller;
+        if (controller) {
+          console.log(controller);
+          controller.abort(); // 调用abort方法取消请求
+        }
+        return await response.json(); // 返回服务器响应的取消确认
+      }
+      throw response;
+    } catch (error) {
+      throw new Error(`Error cancelling query: ${error.message}`);
+    }
+  },
 );
 
 const removeActive = (state, key) => {
@@ -89,8 +123,18 @@ const CypherSlice = createSlice({
     queryResult: {},
     activeRequests: [],
     labels: { nodeLabels: {}, edgeLabels: {} },
+    webworkerStatus: 'init',
+    renderStatus: 0, // 0 初始化和渲染完毕   1 逐步加载  2 加载完成 
   },
   reducers: {
+    setWebworkerStatus: (state, action) => {
+      state.webworkerStatus = action.payload;
+    },
+    setRenderStatus: (state, action) => {
+      console.log('-----------------cypher------------------');
+      console.log(action.payload);
+      state.renderStatus = action.payload;
+    },
     setLabels: {
       reducer: (state, action) => {
         if (action.payload.elementType === 'node') {
@@ -144,6 +188,8 @@ const CypherSlice = createSlice({
   },
 });
 
-export const { setLabels, removeActiveRequests } = CypherSlice.actions;
+export const { 
+  setLabels, removeActiveRequests, setWebworkerStatus, setRenderStatus,
+} = CypherSlice.actions;
 
 export default CypherSlice.reducer;

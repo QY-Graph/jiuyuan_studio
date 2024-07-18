@@ -19,10 +19,14 @@
 
 import React, { createRef, useEffect, useState } from 'react';
 import uuid from 'react-uuid';
+import { useDispatch } from 'react-redux';
 import { saveAs } from 'file-saver';
 import { Parser } from 'json2csv';
 import PropTypes from 'prop-types';
+import { Button } from 'antd';
+import { CloseSquareOutlined, CloseOutlined, StopOutlined } from '@ant-design/icons';
 import { Spinner } from 'react-bootstrap';
+import { removeActiveRequests } from '../../../features/cypher/CypherSlice';
 import CypherResultCytoscapeContainer from '../../cypherresult/containers/CypherResultCytoscapeContainer';
 import CypherResultTableContainer from '../../cypherresult/containers/CypherResultTableContainer';
 import GraphFilterModal from '../../cypherresult/components/GraphFilterModal';
@@ -30,11 +34,13 @@ import EdgeThicknessMenu from '../../cypherresult/components/EdgeThicknessMenu';
 import Frame from '../Frame';
 
 const CypherResultFrame = ({
+  cancelCypherQuery,
   queryComplete,
   refKey,
   isPinned,
   reqString,
 }) => {
+  const dispatch = useDispatch();
   const chartAreaRef = createRef();
   const [cytoscapeContainerKey, setCytoscapeContainerKey] = useState(uuid());
 
@@ -175,6 +181,17 @@ const CypherResultFrame = ({
     }
   };
 
+  const onClick = () => {
+    dispatch(cancelCypherQuery(refKey))
+      .then((response) => {
+        dispatch(removeActiveRequests(refKey));
+        console.log('Cancellation confirmed:', response);
+      })
+      .catch((error) => {
+        console.error('Failed to cancel query:', error);
+      });
+  };
+  
   return (
     <>
       <Frame
@@ -237,8 +254,25 @@ const CypherResultFrame = ({
             )
             : (
               <div style={{ alignContent: 'center' }}>
-                <div style={{ marginLeft: '50%', padding: '20px' }} id={`${refKey}-loading`}>
+                <div 
+                  style={{ 
+                    marginRight: '45%', padding: '20px', background: '#fff', float: 'right',
+                  }} 
+                  id={`${refKey}-loading`}
+                >
                   <Spinner animation="border" />
+                  {/* <Button
+                    onClick={() => onClick()}
+                    danger
+                    type="primary" 
+                    icon={<StopOutlined />} 
+                    style={{ 
+                      position: 'absolute', right: '40px', top: '22px', display: 
+                      'flex', alignItems: 'center',
+                    }} 
+                  >
+                    取消
+                  </Button> */}
                 </div>
               </div>
             )

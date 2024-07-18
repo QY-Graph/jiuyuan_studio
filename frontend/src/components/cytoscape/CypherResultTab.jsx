@@ -37,6 +37,8 @@ class CypherResultTab extends Component {
 
   render() {
     const activeTab = (refKey, tabType) => {
+      console.log(refKey);
+      console.log(tabType);
       if (tabType === 'graph') {
         document.getElementById(`${refKey}-${tabType}`).classList.add('selected-frame-tab');
         document.getElementById(`${refKey}-${tabType}`).classList.remove('deselected-frame-tab');
@@ -51,6 +53,7 @@ class CypherResultTab extends Component {
     };
 
     const handleTabChange = (activeKey) => {
+      console.log(this.refKey);
       if (activeKey === '1') {
         activeTab(this.refKey, 'graph');
         this.setIsTable(false);
