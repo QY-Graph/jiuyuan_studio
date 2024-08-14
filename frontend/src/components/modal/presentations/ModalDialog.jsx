@@ -44,7 +44,13 @@ const ModalDialog = ({
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ cmd: `SELECT * FROM cypher('${graphHistory[0]}', $$ MATCH (S) WHERE id(S) = ${elementHistory[0]} DETACH DELETE S $$) as (S agtype);` }),
+        // body: JSON.stringify({ 
+        //   cmd: `MATCH (S) WHERE id(S) = ${elementHistory[0]} DETACH DELETE S;` 
+        // }),
+        body: JSON.stringify({ 
+          cmd: `MATCH (S) WHERE id(S)=${elementHistory[0]} DETACH DELETE S`,
+          // "MATCH (S) WHERE id(S) =\"844424930132036\" DETACH DELETE S;"
+        }),
       })
       .then((res) => {
         if (res.ok) {

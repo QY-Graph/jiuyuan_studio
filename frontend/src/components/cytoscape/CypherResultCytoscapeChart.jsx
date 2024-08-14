@@ -63,6 +63,7 @@ cytoscape.use(spread);
 cytoscape.use(cxtmenu);
 
 const CypherResultCytoscapeCharts = ({
+  refKey,
   elements,
   cytoscapeObject,
   setCytoscapeObject,
@@ -78,21 +79,28 @@ const CypherResultCytoscapeCharts = ({
   addElementHistory,
   // chartId,
 }) => {
-  const renderStatus = useSelector((state) => state.cypher.renderStatus);
+  const renderStatus = useSelector((state) => state.cypher.renderStatus[refKey]);
   const renderStatusRef = useRef(renderStatus);
   const [cytoscapeMenu, setCytoscapeMenu] = useState(null);
   const [initialized, setInitialized] = useState(false);
   const [cyConfig, setCyConfig] = useState(stylesheet);
   const dispatch = useDispatch();
 
+  // const cyRef = useRef(null);
   // 同步更新 renderStatusRef 的值
   useEffect(() => {
     renderStatusRef.current = renderStatus;
     console.log(renderStatusRef.current);
+    console.log(refKey);
+    // console.log(state.cypher.renderStatus);
+    // console.log(state.cypher.renderStatus[refKey]);
   }, [renderStatus]);
 
   const addEventOnElements = (targetElements) => {
+    console.log('init addEventOnElements');
+    console.log(targetElements);
     targetElements.bind('mouseover', (e) => {
+      console.log('mouseover');
       onElementsMouseover({ type: 'elements', data: e.target.data() });
       e.target.addClass('highlight');
     });
@@ -198,6 +206,7 @@ const CypherResultCytoscapeCharts = ({
       const pos = ele.position();
       ele.position({ x: pos.x - xGap, y: pos.y - yGap });
     });
+    console.log('--------addEventOnElements-- 2 -------');
     addEventOnElements(cytoscapeObject.elements('new'));
 
     addLegendData(generatedData.legend);
@@ -353,7 +362,7 @@ const CypherResultCytoscapeCharts = ({
     console.log(cytoscapeLayout);
     console.log(cytoscapeObject);
     if ((cytoscapeLayout && cytoscapeObject) || renderStatus !== 0) {
-      console.log('---------------cytoscapeLayout-------------------');
+      console.log('-------cytoscapeLayout---a---');
       console.log(cytoscapeLayout);
       const selectedLayout = seletableLayouts[cytoscapeLayout];
       selectedLayout.animate = true;
@@ -363,14 +372,16 @@ const CypherResultCytoscapeCharts = ({
       cytoscapeObject.maxZoom(1.5);
       cytoscapeObject.layout(selectedLayout).run();
       cytoscapeObject.maxZoom(5);
-      if (!initialized) {
+      console.log('renderStatus = ', renderStatus);
+      if (!initialized && renderStatus === 2) {
+        console.log('--------addEventOnElements-- 1 -------');
         addEventOnElements(cytoscapeObject.elements());
         setInitialized(true);
       }
     }
     if (renderStatus === 2) {
       console.log('布局全部渲染完成');
-      dispatch(setRenderStatus(0)); // 设置渲染状态为完成
+      dispatch(setRenderStatus({ key: refKey, status: 0 })); // 设置渲染状态为完成
     }
   }, [cytoscapeObject, cytoscapeLayout, renderStatus]);
 
@@ -398,8 +409,17 @@ const CypherResultCytoscapeCharts = ({
       //   console.log('布局全部渲染完成');
       //   dispatch(setRenderStatus(0)); // 设置渲染状态为完成
       // }
-      if (cytoscapeObject) return;
+      console.log('ggggggggggggggggggggggggggggggggg');
+      if (cytoscapeObject) {
+        // const selectedLayout = seletableLayouts[cytoscapeLayout];
+        // console.log(selectedLayout);
+        // cytoscapeObject.layout(selectedLayout).run();
+        return;
+      }
       setCytoscapeObject(newCytoscapeObject);
+      // const selectedLayout = seletableLayouts[cytoscapeLayout];
+      // console.log(selectedLayout);
+      // console.log(cytoscapeObject.layout);
     },
     [cytoscapeObject, renderStatus],
   );

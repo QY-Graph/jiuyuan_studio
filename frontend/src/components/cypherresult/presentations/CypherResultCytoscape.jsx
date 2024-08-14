@@ -82,7 +82,8 @@ const CypherResultCytoscape = forwardRef((props, ref) => {
         } else {
           console.log('ggggggggggggggggggggggggggggggg');
           isProcessing.current = false;
-          dispatch(setRenderStatus(2));
+          // setRenderStatus(2)
+          dispatch(setRenderStatus({ key: props.refKey, status: 2 }));
           console.log(cytoscapeLayout);
           
           // if (cytoscapeLayout === 'coseBilkent') {
@@ -93,6 +94,8 @@ const CypherResultCytoscape = forwardRef((props, ref) => {
         }
       };
       requestAnimationFrame(renderNextChunk);
+    } else {
+      console.log('length is 00000000000000000000000000000000');
     }
   };
 
@@ -156,7 +159,7 @@ const CypherResultCytoscape = forwardRef((props, ref) => {
   };
 
   const getFooterData = (event) => {
-    // console.log('--------------getFooterData----------------');
+    console.log('--------------getFooterData----------------');
     if (event.type === 'labels') {
       setCaptions(['gid', 'label'].concat(Array.from(getCaptionsFromCytoscapeObject(event.data.type, event.data.label))));
 
@@ -462,6 +465,7 @@ const CypherResultCytoscape = forwardRef((props, ref) => {
         />
       </div>
       <CypherResultCytoscapeChart
+        refKey={props.refKey}
         onElementsMouseover={getFooterData}
         legendData={legendData}
         elements={elements}
@@ -476,6 +480,8 @@ const CypherResultCytoscape = forwardRef((props, ref) => {
         openModal={props.openModal}
         addGraphHistory={props.addGraphHistory}
         addElementHistory={props.addElementHistory}
+        // renderStatus={renderStatus}
+        // setRenderStatus={setRenderStatus}
         // chartId="unique-chart-id-1" // 确保每个组件实例有唯一的 ID
       />
       <CypherResultCytoscapeFooter

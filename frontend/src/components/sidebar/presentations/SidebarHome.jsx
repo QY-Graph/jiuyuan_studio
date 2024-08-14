@@ -40,9 +40,9 @@ const genLabelQuery = (eleType, labelName, database) => {
   }
   if (eleType === 'edge') {
     if (labelName === '*') {
-      return 'MATCH (V)-[R]-(V2) RETURN V,R,V2';
+      return 'MATCH (V)-[R]->(V2) RETURN V,R,V2';
     }
-    return `MATCH (V)-[R:${labelName}]-(V2) RETURN V,R,V2`;
+    return `MATCH (V)-[R:${labelName}]->(V2) RETURN V,R,V2`;
   }
 
   return '';

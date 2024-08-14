@@ -51,9 +51,18 @@ const mapDispatchToProps = {
 };
 const CypherResult = (props) => {
   const dispatch = useDispatch();
+  // const [renderStatus, setRenderStatus] = useState(0);
   const renderStatus = useSelector((state) => state.cypher.renderStatus);
   const { 
-    queryResult, maxDataOfGraph, maxDataOfTable, setChartLegend, graph, setIsTable, refKey,
+    queryResult, 
+    maxDataOfGraph, 
+    maxDataOfTable, 
+    setChartLegend, 
+    graph, 
+    setIsTable, 
+    refKey, 
+    onAddSubmit, 
+    onRemoveSubmit,
   } = props;
 
   const [data, setData] = useState({
@@ -75,9 +84,12 @@ const CypherResult = (props) => {
   const [runworker] = useWorker(generateCytoscapeElement);
 
   useEffect(() => {
+    console.log('=======================================', queryResult);
     if (queryResult.complete) {
       const delay = 100; // 延时 0.1 秒执行
-      dispatch(setRenderStatus(1));
+      // setRenderStatus(1)
+      // if(queryResult.rowCount == 0)
+      dispatch(setRenderStatus({ key: refKey, status: 1 }));
       const timeoutId = setTimeout(async () => {
         console.log('==============init data=============');
         // console.log(renderStatus);
@@ -88,11 +100,21 @@ const CypherResult = (props) => {
             maxDataOfGraph,
             false,
           );
-          setData(elements);
+
+          if (elements && elements.length === 0) {
+            // 如果元素数组为空，设置状态为0
+            dispatch(setRenderStatus({ key: refKey, status: 0 }));
+          } else {
+            setData(elements);
+          }
         } catch (error) {
           console.error('Worker error:', error);
+          dispatch(setRenderStatus({ key: refKey, status: 0 }));
         }
       }, delay);
+      if (queryResult.rowCount === 0) {
+        dispatch(setRenderStatus({ key: refKey, status: 0 }));
+      }
 
       // Cleanup function to clear the timeout if the component unmounts
       return () => clearTimeout(timeoutId);
@@ -109,7 +131,12 @@ const CypherResult = (props) => {
       graph={graph}
       renderStatus={renderStatus}
       setIsTable={setIsTable}
+      onAddSubmit={onAddSubmit}
+      onRemoveSubmit={onRemoveSubmit}
       refKey={refKey}
+      openModal={openModal}
+      addGraphHistory={addGraphHistory}
+      addElementHistory={addElementHistory}
     />
   );
 };

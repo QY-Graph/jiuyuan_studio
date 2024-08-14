@@ -32,6 +32,7 @@ import { setting } from '../../../conf/config';
 import IconPlay from '../../../icons/IconPlay';
 import { getMetaData } from '../../../features/database/MetadataSlice';
 import { requestScrollToTop } from '../../../features/scroll/scrollSlice';
+import { setRenderStatus } from '../../../features/cypher/CypherSlice';
 import './Editor.scss';
 
 const Editor = ({
@@ -99,13 +100,19 @@ const Editor = ({
         dispatch(() => addFrame(command, 'ServerStatus', refKey));
       }
     } else if (database.status === 'connected') {
+      console.log('Run Query');
       addFrame(command, 'CypherResultFrame', refKey);
+      console.log('Run Query2');
       const req = dispatch(() => executeCypherQuery([refKey, command]));
+      console.log('Run Query3');
+      dispatch(setRenderStatus({ key: refKey, status: 0 }));
       req.then((response) => {
-        // console.log(response);
+        console.log('Run Query4');
+        console.log(response);
         if (response.type === 'cypher/executeCypherQuery/rejected') {
           if (response.error.name !== 'AbortError') {
             dispatch(() => addAlert('ErrorCypherQuery'));
+            console.log('Query Success');
             const currentCommand = store.getState().editor.command;
             if (currentCommand === '') {
               setCommand(command);

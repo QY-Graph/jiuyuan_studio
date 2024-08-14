@@ -70,7 +70,8 @@ const Frame = ({
   //   </Menu>
   // );
   const queryComplete = useSelector((state) => state.cypher.queryResult[refKey]);
-  const renderStatus = useSelector((state) => state.cypher.renderStatus);
+  // const [renderStatus, setRenderStatus] = useState(0);
+  const renderStatus = useSelector((state) => state.cypher.renderStatus[refKey]);
 
   const handleStop = () => {
     Modal.confirm({

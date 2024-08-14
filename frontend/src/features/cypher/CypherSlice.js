@@ -124,16 +124,22 @@ const CypherSlice = createSlice({
     activeRequests: [],
     labels: { nodeLabels: {}, edgeLabels: {} },
     webworkerStatus: 'init',
-    renderStatus: 0, // 0 初始化和渲染完毕   1 逐步加载  2 加载完成 
+    renderStatus: {}, // 0 初始化和渲染完毕   1 逐步加载  2 加载完成 
   },
   reducers: {
     setWebworkerStatus: (state, action) => {
       state.webworkerStatus = action.payload;
     },
+    // setRenderStatus: (state, action) => {
+    //   console.log('-----------------cypher------------------');
+    //   console.log(action.payload);
+    //   state.renderStatus = action.payload;
+    // },
     setRenderStatus: (state, action) => {
-      console.log('-----------------cypher------------------');
-      console.log(action.payload);
-      state.renderStatus = action.payload;
+      console.log('-----------------setRenderStatus------------------');
+      const { key, status } = action.payload; // 假设action.payload包含key和status
+      console.log('Setting render status for:', key, 'to', status);
+      state.renderStatus[key] = status; // 设置特定查询的渲染状态
     },
     setLabels: {
       reducer: (state, action) => {
