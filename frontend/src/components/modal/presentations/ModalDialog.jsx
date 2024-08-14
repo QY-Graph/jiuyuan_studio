@@ -48,7 +48,7 @@ const ModalDialog = ({
         //   cmd: `MATCH (S) WHERE id(S) = ${elementHistory[0]} DETACH DELETE S;` 
         // }),
         body: JSON.stringify({ 
-          cmd: `MATCH (S) WHERE id(S)=${elementHistory[0]} DETACH DELETE S`,
+          cmd: `MATCH (S) WHERE id(S)=${elementHistory[0]} DETACH DELETE S RETURN S AS S`,
           // "MATCH (S) WHERE id(S) =\"844424930132036\" DETACH DELETE S;"
         }),
       })

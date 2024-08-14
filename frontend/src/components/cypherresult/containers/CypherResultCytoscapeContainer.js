@@ -112,7 +112,8 @@ const CypherResult = (props) => {
           dispatch(setRenderStatus({ key: refKey, status: 0 }));
         }
       }, delay);
-      if (queryResult.rowCount === 0) {
+      // || (queryResult.columns.length == 1 && queryResult.columns[0] === 'r')
+      if (queryResult.rowCount === 0 || (queryResult.columns.length === 1 && queryResult.columns[0] === 'r')) {
         dispatch(setRenderStatus({ key: refKey, status: 0 }));
       }
 
