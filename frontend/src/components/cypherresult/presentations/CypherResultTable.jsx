@@ -97,7 +97,12 @@ const CypherResultTable = ({ data, ...props }) => {
   } if (data.command && data.command.toUpperCase() === 'CREATE') {
     return <div style={{ margin: '25px' }}><span style={{ whiteSpace: 'pre-line' }}>{data.command.toUpperCase()}</span></div>;
   } if (data.command && data.command.toUpperCase() === 'ERROR') {
-    return <div style={{ margin: '25px' }}><span style={{ whiteSpace: 'pre-line' }}>{data.message}</span></div>;
+    return (
+      <div style={{ margin: '25px' }}>
+        <div style={{ color: '#e24444' }}>Query error occurred!</div>
+        <div style={{ margin: '90px 20px 20px 20px', whiteSpace: 'pre-line' }}>{data.message}</div>
+      </div>
+    );
   } if (data.command === null) {
     return <div style={{ margin: '25px' }}><span style={{ whiteSpace: 'pre-line' }}>Query not entered!</span></div>;
   }

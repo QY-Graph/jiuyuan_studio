@@ -32,6 +32,7 @@ const CypherResultFrame = ({
     bodyNoPadding
   >
     <div className="d-flex h-100">
+      {/* 1 */}
       <CypherResultTableContainer refKey={refKey} />
     </div>
   </Frame>

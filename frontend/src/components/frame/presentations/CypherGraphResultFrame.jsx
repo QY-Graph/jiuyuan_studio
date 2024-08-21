@@ -228,6 +228,7 @@ const CypherResultFrame = ({
           queryComplete?.complete
             ? (
               <div className="d-flex h-100">
+                {/* 2 */}
                 <div style={{ height: '100%', width: '100%' }} id={`${refKey}-graph`} className="selected-frame-tab">
                   <CypherResultCytoscapeContainer
                     key={cytoscapeContainerKey}

@@ -47,6 +47,7 @@ const validateVlePathVariableReturn = (cypherQuery) => {
   }
 };
 
+// MATCH (S) WHERE id(S) = "844424930141281" DETACH DELETE S AS S
 export const executeCypherQuery = createAsyncThunk(
   'cypher/executeCypherQuery',
   async (args, thunkAPI) => {
@@ -76,7 +77,9 @@ export const executeCypherQuery = createAsyncThunk(
         throw error;
       } else {
         const errorJson = await error.json();
-        const messaage = errorJson.message.charAt(0).toUpperCase() + errorJson.message.slice(1);
+        console.log(errorJson);
+        const messaage = errorJson.error;
+        // const messaage = errorJson.message.charAt(0).toUpperCase() + errorJson.message.slice(1);
         throw messaage;
       }
     }
