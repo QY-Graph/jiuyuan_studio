@@ -29,8 +29,7 @@ import { setLabels, setRenderStatus } from '../../../features/cypher/CypherSlice
 import { openModal, addGraphHistory, addElementHistory } from '../../../features/modal/ModalSlice';
 // import { generateCytoscapeElement } from '../../../features/cypher/CypherUtil';
 // import { generateCytoscapeElement } from './generateElementsWorker';
-
-const d = [];
+// const d = [];
 const generateCytoscapeElement = (data, maxDataOfGraph, isNew) => {
   const nodeLabelColors = [
     {
